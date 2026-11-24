@@ -175,18 +175,7 @@
         "frame_id": 3750,
         "timestamp_ms": 125000
       },
-      "frames_during": [
-        {
-          "path": "images/game_000001/shot_000042/frame_0001.png",
-          "frame_id": 3751,
-          "timestamp_ms": 125033
-        },
-        {
-          "path": "images/game_000001/shot_000042/frame_0002.png",
-          "frame_id": 3752,
-          "timestamp_ms": 125067
-        }
-      ],
+      "frames_during": [],
       "image_after": {
         "path": "images/game_000001/shot_000042/after.png",
         "frame_id": 3853,
