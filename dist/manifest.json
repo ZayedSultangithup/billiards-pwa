@@ -1,0 +1,36 @@
+{
+  "short_name": "Billiards",
+  "name": "Billiards - 3D Pool & Snooker Simulator",
+  "description": "Realistic 3D Billiards, Pool & Snooker simulator with offline play and AI data collection.",
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icon-maskable.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    }
+  ],
+  "start_url": "./index.html",
+  "background_color": "#0b1611",
+  "display": "standalone",
+  "orientation": "landscape",
+  "scope": "./",
+  "theme_color": "#0b1611",
+  "categories": [
+    "games",
+    "sports",
+    "entertainment"
+  ]
+}

@@ -1,0 +1,937 @@
+"use strict";(()=>{var O=globalThis,H=O.ShadowRoot&&(O.ShadyCSS===void 0||O.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,q=Symbol(),Se=new WeakMap,N=class{constructor(e,t,i){if(this._$cssResult$=!0,i!==q)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=e,this.t=t}get styleSheet(){let e=this.o,t=this.t;if(H&&e===void 0){let i=t!==void 0&&t.length===1;i&&(e=Se.get(t)),e===void 0&&((this.o=e=new CSSStyleSheet).replaceSync(this.cssText),i&&Se.set(t,e))}return e}toString(){return this.cssText}},$e=r=>new N(typeof r=="string"?r:r+"",void 0,q),h=(r,...e)=>{let t=r.length===1?r[0]:e.reduce((i,o,a)=>i+(n=>{if(n._$cssResult$===!0)return n.cssText;if(typeof n=="number")return n;throw Error("Value passed to 'css' function must be a 'css' function result: "+n+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(o)+r[a+1],r[0]);return new N(t,r,q)},ke=(r,e)=>{if(H)r.adoptedStyleSheets=e.map(t=>t instanceof CSSStyleSheet?t:t.styleSheet);else for(let t of e){let i=document.createElement("style"),o=O.litNonce;o!==void 0&&i.setAttribute("nonce",o),i.textContent=t.cssText,r.appendChild(i)}},W=H?r=>r:r=>r instanceof CSSStyleSheet?(e=>{let t="";for(let i of e.cssRules)t+=i.cssText;return $e(t)})(r):r;var{is:Xe,defineProperty:Qe,getOwnPropertyDescriptor:et,getOwnPropertyNames:tt,getOwnPropertySymbols:it,getPrototypeOf:rt}=Object,D=globalThis,Ae=D.trustedTypes,ot=Ae?Ae.emptyScript:"",at=D.reactiveElementPolyfillSupport,z=(r,e)=>r,J={toAttribute(r,e){switch(e){case Boolean:r=r?ot:null;break;case Object:case Array:r=r==null?r:JSON.stringify(r)}return r},fromAttribute(r,e){let t=r;switch(e){case Boolean:t=r!==null;break;case Number:t=r===null?null:Number(r);break;case Object:case Array:try{t=JSON.parse(r)}catch{t=null}}return t}},Ee=(r,e)=>!Xe(r,e),Ce={attribute:!0,type:String,converter:J,reflect:!1,useDefault:!1,hasChanged:Ee};Symbol.metadata??=Symbol("metadata"),D.litPropertyMetadata??=new WeakMap;var v=class extends HTMLElement{static addInitializer(e){this._$Ei(),(this.l??=[]).push(e)}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(e,t=Ce){if(t.state&&(t.attribute=!1),this._$Ei(),this.prototype.hasOwnProperty(e)&&((t=Object.create(t)).wrapped=!0),this.elementProperties.set(e,t),!t.noAccessor){let i=Symbol(),o=this.getPropertyDescriptor(e,i,t);o!==void 0&&Qe(this.prototype,e,o)}}static getPropertyDescriptor(e,t,i){let{get:o,set:a}=et(this.prototype,e)??{get(){return this[t]},set(n){this[t]=n}};return{get:o,set(n){let c=o?.call(this);a?.call(this,n),this.requestUpdate(e,c,i)},configurable:!0,enumerable:!0}}static getPropertyOptions(e){return this.elementProperties.get(e)??Ce}static _$Ei(){if(this.hasOwnProperty(z("elementProperties")))return;let e=rt(this);e.finalize(),e.l!==void 0&&(this.l=[...e.l]),this.elementProperties=new Map(e.elementProperties)}static finalize(){if(this.hasOwnProperty(z("finalized")))return;if(this.finalized=!0,this._$Ei(),this.hasOwnProperty(z("properties"))){let t=this.properties,i=[...tt(t),...it(t)];for(let o of i)this.createProperty(o,t[o])}let e=this[Symbol.metadata];if(e!==null){let t=litPropertyMetadata.get(e);if(t!==void 0)for(let[i,o]of t)this.elementProperties.set(i,o)}this._$Eh=new Map;for(let[t,i]of this.elementProperties){let o=this._$Eu(t,i);o!==void 0&&this._$Eh.set(o,t)}this.elementStyles=this.finalizeStyles(this.styles)}static finalizeStyles(e){let t=[];if(Array.isArray(e)){let i=new Set(e.flat(1/0).reverse());for(let o of i)t.unshift(W(o))}else e!==void 0&&t.push(W(e));return t}static _$Eu(e,t){let i=t.attribute;return i===!1?void 0:typeof i=="string"?i:typeof e=="string"?e.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=!1,this.hasUpdated=!1,this._$Em=null,this._$Ev()}_$Ev(){this._$ES=new Promise(e=>this.enableUpdating=e),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(e=>e(this))}addController(e){(this._$EO??=new Set).add(e),this.renderRoot!==void 0&&this.isConnected&&e.hostConnected?.()}removeController(e){this._$EO?.delete(e)}_$E_(){let e=new Map,t=this.constructor.elementProperties;for(let i of t.keys())this.hasOwnProperty(i)&&(e.set(i,this[i]),delete this[i]);e.size>0&&(this._$Ep=e)}createRenderRoot(){let e=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return ke(e,this.constructor.elementStyles),e}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(!0),this._$EO?.forEach(e=>e.hostConnected?.())}enableUpdating(e){}disconnectedCallback(){this._$EO?.forEach(e=>e.hostDisconnected?.())}attributeChangedCallback(e,t,i){this._$AK(e,i)}_$ET(e,t){let i=this.constructor.elementProperties.get(e),o=this.constructor._$Eu(e,i);if(o!==void 0&&i.reflect===!0){let a=(i.converter?.toAttribute!==void 0?i.converter:J).toAttribute(t,i.type);this._$Em=e,a==null?this.removeAttribute(o):this.setAttribute(o,a),this._$Em=null}}_$AK(e,t){let i=this.constructor,o=i._$Eh.get(e);if(o!==void 0&&this._$Em!==o){let a=i.getPropertyOptions(o),n=typeof a.converter=="function"?{fromAttribute:a.converter}:a.converter?.fromAttribute!==void 0?a.converter:J;this._$Em=o;let c=n.fromAttribute(t,a.type);this[o]=c??this._$Ej?.get(o)??c,this._$Em=null}}requestUpdate(e,t,i,o=!1,a){if(e!==void 0){let n=this.constructor;if(o===!1&&(a=this[e]),i??=n.getPropertyOptions(e),!((i.hasChanged??Ee)(a,t)||i.useDefault&&i.reflect&&a===this._$Ej?.get(e)&&!this.hasAttribute(n._$Eu(e,i))))return;this.C(e,t,i)}this.isUpdatePending===!1&&(this._$ES=this._$EP())}C(e,t,{useDefault:i,reflect:o,wrapped:a},n){i&&!(this._$Ej??=new Map).has(e)&&(this._$Ej.set(e,n??t??this[e]),a!==!0||n!==void 0)||(this._$AL.has(e)||(this.hasUpdated||i||(t=void 0),this._$AL.set(e,t)),o===!0&&this._$Em!==e&&(this._$Eq??=new Set).add(e))}async _$EP(){this.isUpdatePending=!0;try{await this._$ES}catch(t){Promise.reject(t)}let e=this.scheduleUpdate();return e!=null&&await e,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(let[o,a]of this._$Ep)this[o]=a;this._$Ep=void 0}let i=this.constructor.elementProperties;if(i.size>0)for(let[o,a]of i){let{wrapped:n}=a,c=this[o];n!==!0||this._$AL.has(o)||c===void 0||this.C(o,void 0,a,c)}}let e=!1,t=this._$AL;try{e=this.shouldUpdate(t),e?(this.willUpdate(t),this._$EO?.forEach(i=>i.hostUpdate?.()),this.update(t)):this._$EM()}catch(i){throw e=!1,this._$EM(),i}e&&this._$AE(t)}willUpdate(e){}_$AE(e){this._$EO?.forEach(t=>t.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=!0,this.firstUpdated(e)),this.updated(e)}_$EM(){this._$AL=new Map,this.isUpdatePending=!1}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(e){return!0}update(e){this._$Eq&&=this._$Eq.forEach(t=>this._$ET(t,this[t])),this._$EM()}updated(e){}firstUpdated(e){}};v.elementStyles=[],v.shadowRootOptions={mode:"open"},v[z("elementProperties")]=new Map,v[z("finalized")]=new Map,at?.({ReactiveElement:v}),(D.reactiveElementVersions??=[]).push("2.1.2");var re=globalThis,Te=r=>r,G=re.trustedTypes,Re=G?G.createPolicy("lit-html",{createHTML:r=>r}):void 0,Ue="$lit$",_=`lit$${Math.random().toFixed(9).slice(2)}$`,Me="?"+_,nt=`<${Me}>`,k=document,P=()=>k.createComment(""),U=r=>r===null||typeof r!="object"&&typeof r!="function",oe=Array.isArray,st=r=>oe(r)||typeof r?.[Symbol.iterator]=="function",Z=`[ 	
+\f\r]`,L=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,Ie=/-->/g,Ne=/>/g,S=RegExp(`>|${Z}(?:([^\\s"'>=/]+)(${Z}*=${Z}*(?:[^ 	
+\f\r"'\`<>=]|("|')|))|$)`,"g"),ze=/'/g,Le=/"/g,je=/^(?:script|style|textarea|title)$/i,ae=r=>(e,...t)=>({_$litType$:r,strings:e,values:t}),s=ae(1),zt=ae(2),Lt=ae(3),A=Symbol.for("lit-noChange"),u=Symbol.for("lit-nothing"),Pe=new WeakMap,$=k.createTreeWalker(k,129);function Fe(r,e){if(!oe(r)||!r.hasOwnProperty("raw"))throw Error("invalid template strings array");return Re!==void 0?Re.createHTML(e):e}var lt=(r,e)=>{let t=r.length-1,i=[],o,a=e===2?"<svg>":e===3?"<math>":"",n=L;for(let c=0;c<t;c++){let l=r[c],p,m,d=-1,y=0;for(;y<l.length&&(n.lastIndex=y,m=n.exec(l),m!==null);)y=n.lastIndex,n===L?m[1]==="!--"?n=Ie:m[1]!==void 0?n=Ne:m[2]!==void 0?(je.test(m[2])&&(o=RegExp("</"+m[2],"g")),n=S):m[3]!==void 0&&(n=S):n===S?m[0]===">"?(n=o??L,d=-1):m[1]===void 0?d=-2:(d=n.lastIndex-m[2].length,p=m[1],n=m[3]===void 0?S:m[3]==='"'?Le:ze):n===Le||n===ze?n=S:n===Ie||n===Ne?n=L:(n=S,o=void 0);let f=n===S&&r[c+1].startsWith("/>")?" ":"";a+=n===L?l+nt:d>=0?(i.push(p),l.slice(0,d)+Ue+l.slice(d)+_+f):l+_+(d===-2?c:f)}return[Fe(r,a+(r[t]||"<?>")+(e===2?"</svg>":e===3?"</math>":"")),i]},M=class r{constructor({strings:e,_$litType$:t},i){let o;this.parts=[];let a=0,n=0,c=e.length-1,l=this.parts,[p,m]=lt(e,t);if(this.el=r.createElement(p,i),$.currentNode=this.el.content,t===2||t===3){let d=this.el.content.firstChild;d.replaceWith(...d.childNodes)}for(;(o=$.nextNode())!==null&&l.length<c;){if(o.nodeType===1){if(o.hasAttributes())for(let d of o.getAttributeNames())if(d.endsWith(Ue)){let y=m[n++],f=o.getAttribute(d).split(_),E=/([.?@])?(.*)/.exec(y);l.push({type:1,index:a,name:E[2],strings:f,ctor:E[1]==="."?Q:E[1]==="?"?ee:E[1]==="@"?te:R}),o.removeAttribute(d)}else d.startsWith(_)&&(l.push({type:6,index:a}),o.removeAttribute(d));if(je.test(o.tagName)){let d=o.textContent.split(_),y=d.length-1;if(y>0){o.textContent=G?G.emptyScript:"";for(let f=0;f<y;f++)o.append(d[f],P()),$.nextNode(),l.push({type:2,index:++a});o.append(d[y],P())}}}else if(o.nodeType===8)if(o.data===Me)l.push({type:2,index:a});else{let d=-1;for(;(d=o.data.indexOf(_,d+1))!==-1;)l.push({type:7,index:a}),d+=_.length-1}a++}}static createElement(e,t){let i=k.createElement("template");return i.innerHTML=e,i}};function T(r,e,t=r,i){if(e===A)return e;let o=i!==void 0?t._$Co?.[i]:t._$Cl,a=U(e)?void 0:e._$litDirective$;return o?.constructor!==a&&(o?._$AO?.(!1),a===void 0?o=void 0:(o=new a(r),o._$AT(r,t,i)),i!==void 0?(t._$Co??=[])[i]=o:t._$Cl=o),o!==void 0&&(e=T(r,o._$AS(r,e.values),o,i)),e}var X=class{constructor(e,t){this._$AV=[],this._$AN=void 0,this._$AD=e,this._$AM=t}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(e){let{el:{content:t},parts:i}=this._$AD,o=(e?.creationScope??k).importNode(t,!0);$.currentNode=o;let a=$.nextNode(),n=0,c=0,l=i[0];for(;l!==void 0;){if(n===l.index){let p;l.type===2?p=new j(a,a.nextSibling,this,e):l.type===1?p=new l.ctor(a,l.name,l.strings,this,e):l.type===6&&(p=new ie(a,this,e)),this._$AV.push(p),l=i[++c]}n!==l?.index&&(a=$.nextNode(),n++)}return $.currentNode=k,o}p(e){let t=0;for(let i of this._$AV)i!==void 0&&(i.strings!==void 0?(i._$AI(e,i,t),t+=i.strings.length-2):i._$AI(e[t])),t++}},j=class r{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(e,t,i,o){this.type=2,this._$AH=u,this._$AN=void 0,this._$AA=e,this._$AB=t,this._$AM=i,this.options=o,this._$Cv=o?.isConnected??!0}get parentNode(){let e=this._$AA.parentNode,t=this._$AM;return t!==void 0&&e?.nodeType===11&&(e=t.parentNode),e}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(e,t=this){e=T(this,e,t),U(e)?e===u||e==null||e===""?(this._$AH!==u&&this._$AR(),this._$AH=u):e!==this._$AH&&e!==A&&this._(e):e._$litType$!==void 0?this.$(e):e.nodeType!==void 0?this.T(e):st(e)?this.k(e):this._(e)}O(e){return this._$AA.parentNode.insertBefore(e,this._$AB)}T(e){this._$AH!==e&&(this._$AR(),this._$AH=this.O(e))}_(e){this._$AH!==u&&U(this._$AH)?this._$AA.nextSibling.data=e:this.T(k.createTextNode(e)),this._$AH=e}$(e){let{values:t,_$litType$:i}=e,o=typeof i=="number"?this._$AC(e):(i.el===void 0&&(i.el=M.createElement(Fe(i.h,i.h[0]),this.options)),i);if(this._$AH?._$AD===o)this._$AH.p(t);else{let a=new X(o,this),n=a.u(this.options);a.p(t),this.T(n),this._$AH=a}}_$AC(e){let t=Pe.get(e.strings);return t===void 0&&Pe.set(e.strings,t=new M(e)),t}k(e){oe(this._$AH)||(this._$AH=[],this._$AR());let t=this._$AH,i,o=0;for(let a of e)o===t.length?t.push(i=new r(this.O(P()),this.O(P()),this,this.options)):i=t[o],i._$AI(a),o++;o<t.length&&(this._$AR(i&&i._$AB.nextSibling,o),t.length=o)}_$AR(e=this._$AA.nextSibling,t){for(this._$AP?.(!1,!0,t);e!==this._$AB;){let i=Te(e).nextSibling;Te(e).remove(),e=i}}setConnected(e){this._$AM===void 0&&(this._$Cv=e,this._$AP?.(e))}},R=class{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(e,t,i,o,a){this.type=1,this._$AH=u,this._$AN=void 0,this.element=e,this.name=t,this._$AM=o,this.options=a,i.length>2||i[0]!==""||i[1]!==""?(this._$AH=Array(i.length-1).fill(new String),this.strings=i):this._$AH=u}_$AI(e,t=this,i,o){let a=this.strings,n=!1;if(a===void 0)e=T(this,e,t,0),n=!U(e)||e!==this._$AH&&e!==A,n&&(this._$AH=e);else{let c=e,l,p;for(e=a[0],l=0;l<a.length-1;l++)p=T(this,c[i+l],t,l),p===A&&(p=this._$AH[l]),n||=!U(p)||p!==this._$AH[l],p===u?e=u:e!==u&&(e+=(p??"")+a[l+1]),this._$AH[l]=p}n&&!o&&this.j(e)}j(e){e===u?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,e??"")}},Q=class extends R{constructor(){super(...arguments),this.type=3}j(e){this.element[this.name]=e===u?void 0:e}},ee=class extends R{constructor(){super(...arguments),this.type=4}j(e){this.element.toggleAttribute(this.name,!!e&&e!==u)}},te=class extends R{constructor(e,t,i,o,a){super(e,t,i,o,a),this.type=5}_$AI(e,t=this){if((e=T(this,e,t,0)??u)===A)return;let i=this._$AH,o=e===u&&i!==u||e.capture!==i.capture||e.once!==i.once||e.passive!==i.passive,a=e!==u&&(i===u||o);o&&this.element.removeEventListener(this.name,this,i),a&&this.element.addEventListener(this.name,this,e),this._$AH=e}handleEvent(e){typeof this._$AH=="function"?this._$AH.call(this.options?.host??this.element,e):this._$AH.handleEvent(e)}},ie=class{constructor(e,t,i){this.element=e,this.type=6,this._$AN=void 0,this._$AM=t,this.options=i}get _$AU(){return this._$AM._$AU}_$AI(e){T(this,e)}};var ct=re.litHtmlPolyfillSupport;ct?.(M,j),(re.litHtmlVersions??=[]).push("3.3.2");var Be=(r,e,t)=>{let i=t?.renderBefore??e,o=i._$litPart$;if(o===void 0){let a=t?.renderBefore??null;i._$litPart$=o=new j(e.insertBefore(P(),a),a,void 0,t??{})}return o._$AI(r),o};var ne=globalThis,g=class extends v{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0}createRenderRoot(){let e=super.createRenderRoot();return this.renderOptions.renderBefore??=e.firstChild,e}update(e){let t=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(e),this._$Do=Be(t,this.renderRoot,this.renderOptions)}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(!0)}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(!1)}render(){return A}};g._$litElement$=!0,g.finalized=!0,ne.litElementHydrateSupport?.({LitElement:g});var dt=ne.litElementPolyfillSupport;dt?.({LitElement:g});(ne.litElementVersions??=[]).push("4.2.2");var se=h`
+    :host, :host([theme="light"]) {
+        --bg:           #f5f5f5;
+        --surface:      #ffffff;
+        --border:       #dddddd;
+        --border-light: #f0f0f0;
+        --text:         #212121;
+        --text-muted:   #757575;
+        --text-dim:     #555555;
+        --text-faint:   #bbbbbb;
+        --btn-bg:       #ffffff;
+        --btn-border:   #cccccc;
+        --btn-hover:    #f0f0f0;
+        --btn-active:   #e0e0e0;
+        --table-head:   #f5f5f5;
+        --banner-warn-bg:      #fff3cd;
+        --banner-warn-border:  #ffc107;
+        --banner-warn-text:    #595959;
+        --banner-decline-bg:   #f8d7da;
+        --banner-decline-border: #f5c6cb;
+        --banner-decline-text: #721c24;
+        --modal-bg:     #ffffff;
+        --modal-cancel: #f8f9fa;
+        --link:         #0055cc;
+        --btn-replay-bg:     #4a90d9;
+        --btn-replay-border: rgba(255, 255, 255, 0.1);
+    }
+    :host([theme="dark"]) {
+        --bg:           #1a1a1a;
+        --surface:      #2a2a2a;
+        --border:       #444444;
+        --border-light: #333333;
+        --text:         #e0e0e0;
+        --text-muted:   #aaaaaa;
+        --text-dim:     #aaaaaa;
+        --text-faint:   #555555;
+        --btn-bg:       #3a3a3a;
+        --btn-border:   #555555;
+        --btn-hover:    #444444;
+        --btn-active:   #505050;
+        --table-head:   #333333;
+        --banner-warn-bg:      #3a2e00;
+        --banner-warn-border:  #ffc107;
+        --banner-warn-text:    #cccccc;
+        --banner-decline-bg:   #3a0a0e;
+        --banner-decline-border: #7a3a3e;
+        --banner-decline-text: #f5c6cb;
+        --modal-bg:     #2a2a2a;
+        --modal-cancel: #3a3a3a;
+        --link:         #6ba3f5;
+        --btn-replay-bg:     #3a3a3a;
+        --btn-replay-border: rgba(255, 255, 255, 0.2);
+    }
+`,qt=h`
+    :host { font-family: 'Exo', 'Exo Fallback', sans-serif; font-weight: 200; }
+`,Oe=h`
+    :host { font-family: 'Exo', 'Exo Fallback', sans-serif; font-weight: 200; }
+    button { cursor: pointer; padding: 0.15rem 0.2rem; border: 1px solid var(--btn-border); border-radius: 4px; background: var(--btn-bg); color: var(--text); font: inherit; font-size: 0.75rem; transition: background-color 0.2s, opacity 0.2s; min-width: 24px; min-height: 24px; }
+    button:hover { background-color: var(--btn-hover); }
+    button:active { background-color: var(--btn-active); }
+    button:focus-visible { outline: 2px solid #007bff; outline-offset: 2px; }
+    /* Shared bevel treatment: inset highlight + drop shadow + tinted glow.
+       :active inverts the bevel and nudges the button down 1 px so clicks feel physical. */
+    .btn-challenge, .btn-accept, .btn-decline, .btn-leave, .btn-spectate {
+        background-image: linear-gradient(180deg, rgb(255 255 255 / 12%), rgb(0 0 0 / 6%));
+        border: none;
+        transition: background-color 0.15s ease, box-shadow 0.15s ease, transform 0.05s ease;
+    }
+    .btn-challenge, .btn-accept, .btn-decline, .btn-leave, .btn-spectate { color: #fff; }
+    .btn-challenge:active, .btn-accept:active, .btn-decline:active, .btn-leave:active, .btn-spectate:active {
+        transform: translateY(1px);
+    }
+
+    .btn-challenge { background-color: #0d6efd; box-shadow: inset 0 1px 0 rgb(255 255 255 / 30%), 0 1px 2px rgb(0 0 0 / 20%), 0 2px 6px rgb(13 110 253 / 25%); }
+    .btn-challenge:hover { background-color: #0b5ed7; box-shadow: inset 0 1px 0 rgb(255 255 255 / 30%), 0 2px 4px rgb(0 0 0 / 22%), 0 4px 10px rgb(13 110 253 / 30%); }
+    .btn-challenge:active { box-shadow: inset 0 1px 2px rgb(0 0 0 / 25%), 0 1px 1px rgb(0 0 0 / 15%); }
+
+    .btn-accept    { background-color: #198754; box-shadow: inset 0 1px 0 rgb(255 255 255 / 30%), 0 1px 2px rgb(0 0 0 / 20%), 0 2px 6px rgb(25 135 84 / 25%); }
+    .btn-accept:hover { background-color: #157347; box-shadow: inset 0 1px 0 rgb(255 255 255 / 30%), 0 2px 4px rgb(0 0 0 / 22%), 0 4px 10px rgb(25 135 84 / 30%); }
+    .btn-accept:active { box-shadow: inset 0 1px 2px rgb(0 0 0 / 25%), 0 1px 1px rgb(0 0 0 / 15%); }
+
+    .btn-decline   { background-color: #bb2d3b; box-shadow: inset 0 1px 0 rgb(255 255 255 / 30%), 0 1px 2px rgb(0 0 0 / 20%), 0 2px 6px rgb(187 45 59 / 25%); }
+    .btn-decline:hover { background-color: #a52834; box-shadow: inset 0 1px 0 rgb(255 255 255 / 30%), 0 2px 4px rgb(0 0 0 / 22%), 0 4px 10px rgb(187 45 59 / 30%); }
+    .btn-decline:active { box-shadow: inset 0 1px 2px rgb(0 0 0 / 25%), 0 1px 1px rgb(0 0 0 / 15%); }
+
+    .btn-leave     { background-color: #6c757d; box-shadow: inset 0 1px 0 rgb(255 255 255 / 30%), 0 1px 2px rgb(0 0 0 / 20%), 0 2px 6px rgb(108 117 125 / 25%); }
+    .btn-leave:hover { background-color: #5a6268; box-shadow: inset 0 1px 0 rgb(255 255 255 / 30%), 0 2px 4px rgb(0 0 0 / 22%), 0 4px 10px rgb(108 117 125 / 30%); }
+    .btn-leave:active { box-shadow: inset 0 1px 2px rgb(0 0 0 / 25%), 0 1px 1px rgb(0 0 0 / 15%); }
+
+    .btn-spectate  { background-color: #7c3aed; box-shadow: inset 0 1px 0 rgb(255 255 255 / 30%), 0 1px 2px rgb(0 0 0 / 20%), 0 2px 6px rgb(124 58 237 / 25%); }
+    .btn-spectate:hover { background-color: #6d28d9; box-shadow: inset 0 1px 0 rgb(255 255 255 / 30%), 0 2px 4px rgb(0 0 0 / 22%), 0 4px 10px rgb(124 58 237 / 30%); }
+    .btn-spectate:active { box-shadow: inset 0 1px 2px rgb(0 0 0 / 25%), 0 1px 1px rgb(0 0 0 / 15%); }
+`,Wt=h`
+    :host { display: block; }
+    ul {
+        list-style: none; margin: 0; padding: 1px;
+        max-height: 148px;
+        display: flex; flex-direction: column;
+        row-gap: 2px;
+        overflow-y: auto; overflow-x: hidden;
+        scrollbar-width: thin;
+        scrollbar-color: var(--border) transparent;
+        transition: max-height 0.3s ease;
+    }
+    ul::-webkit-scrollbar { width: 6px; }
+    ul::-webkit-scrollbar-track { background: transparent; }
+    ul::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    ul.expanded {
+        max-height: var(--ul-expanded-height);
+        overflow: hidden;
+    }
+    li {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 1px 1px;
+        width: 100%; box-sizing: border-box;
+        border: 0.25px solid var(--border-light);
+        border-radius: 4px;
+        min-height: 28px;
+    }
+    li:not(.is-offline):hover { background: var(--btn-hover); }
+    .user-info { display: flex; flex-direction: column; min-width: 0; }
+    .user-name {
+        font-weight: 500; font-size: 0.8rem; color: var(--text);
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .user-status { font-size: 0.7rem; color: var(--text-muted); }
+    .actions { display: flex; gap: 0.2rem; flex-shrink: 0; }
+    .empty { padding: 1rem; text-align: center; color: var(--text-muted); font-style: italic; font-size: 0.8rem; }
+    .is-leaving { filter: grayscale(1); opacity: 0.6; pointer-events: none; }
+    .is-offline { filter: grayscale(1); opacity: 0.35; transition: opacity 0.3s ease-out; animation: none; pointer-events: none; }
+    .expand-toggle {
+        display: flex; justify-content: center; align-items: center;
+        padding: 2px; cursor: pointer;
+        font-size: 0.8rem; color: var(--text-dim);
+        border-radius: 4px;
+        user-select: none;
+        transition: background-color 0.15s;
+    }
+    .expand-toggle:hover {
+        background: var(--btn-hover);
+    }
+    @media (max-width: 730px) {
+        .expand-toggle { visibility: hidden; pointer-events: none; }
+    }
+`,Jt=h`
+    :host { display: block; }
+    .banner { background: var(--banner-warn-bg); border: 1px solid var(--banner-warn-border); border-radius: 6px; padding: 0.4rem 0.6rem; display: flex; flex-direction: column; gap: 0.3rem; }
+    .banner .row { display: flex; gap: 0.3rem; justify-content: flex-end; }
+    .details { font-size: 0.72rem; color: var(--banner-warn-text); display: flex; flex-wrap: wrap; gap: 0.4rem; }
+`,Zt=h`
+    :host { display: block; }
+    .banner { border-radius: 6px; padding: 0.4rem 0.6rem; display: flex; flex-direction: column; gap: 0.3rem; border: 1px solid; }
+    .pending { background: var(--banner-warn-bg); border-color: var(--banner-warn-border); color: var(--text); }
+    .declined { background: var(--banner-decline-bg); border-color: var(--banner-decline-border); color: var(--banner-decline-text); }
+    .row { display: flex; gap: 0.3rem; align-items: center; justify-content: space-between; }
+    .details { font-size: 0.72rem; }
+`,Xt=h`
+    :host { display: block; }
+    .backdrop { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.3); backdrop-filter: blur(1px); display: flex; align-items: center; justify-content: center; z-index: 100; }
+    .modal { background: var(--modal-bg); color: var(--text); border: 1px solid var(--border); border-radius: 12px; padding: 0.75rem 1rem; min-width: 240px; display: flex; flex-direction: column; gap: 2px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); }
+    h3 { margin: 0; font-size: 0.95rem; text-align: center; }
+    .sections { display: flex; flex-direction: column; gap: 2px; }
+    .section { display: flex; flex-direction: column; }
+    .section-header {
+        display: flex; align-items: center; justify-content: flex-start;
+        gap: 0.4rem;
+        padding: 0.15rem; cursor: pointer;
+        background: var(--btn-bg); border: 1px solid var(--btn-border);
+        border-radius: 4px; min-width: 24px; min-height: 24px;
+        transition: background-color 0.15s, filter 0.15s;
+    }
+    .section-header:hover { background: var(--btn-hover); }
+    .section-header.active { background: var(--btn-active); filter: brightness(1.1); }
+    .section-header img { width: 32px; height: 32px; display: block; }
+    .section-label { font-size: 0.8rem; color: var(--text); }
+    .section-body {
+        display: flex; flex-direction: column; gap: 3px;
+        max-height: 0; opacity: 0; visibility: hidden;
+        padding: 0;
+        overflow: hidden;
+        transition: max-height 0.25s ease, opacity 0.2s ease, padding 0.25s ease, visibility 0.25s ease;
+    }
+    .section-body.expanded {
+        max-height: 500px;
+        opacity: 1; visibility: visible;
+        padding: 0.25rem 0 0.25rem 0;
+    }
+    button.rule { text-align: left; padding: 3px 0.6rem; font-size: 0.82rem; display: flex; align-items: center; gap: 0.4rem; margin-left: 2.4rem; }
+    button.rule img { width: 28px; height: 28px; display: block; }
+    button.cancel { background: var(--modal-cancel); color: var(--text); border-color: var(--btn-border); padding: 0.15rem; }
+    button.msg-btn {
+        display: flex; align-items: center; justify-content: center;
+        padding: 0.15rem;
+        background: var(--btn-bg); border: 1px solid var(--btn-border);
+        border-radius: 4px; min-width: 24px; min-height: 24px;
+    }
+    button.msg-btn:hover { background: var(--btn-hover); }
+    .icon-wrap { position: relative; width: 28px; height: 28px; flex-shrink: 0; }
+    .icon-wrap img { width: 28px; height: 28px; display: block; }
+
+    .handicap-label {
+        font-size: 0.78rem; white-space: nowrap; flex-shrink: 0;
+    }
+    .handicap-inline-slider {
+        -webkit-appearance: none;
+        appearance: none;
+        flex: 1;
+        height: 4px;
+        min-width: 50px;
+        background: var(--border);
+        border-radius: 2px;
+        outline: none;
+        cursor: pointer;
+        margin: 0 0.2rem;
+    }
+    .handicap-inline-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 12px; height: 12px;
+        border-radius: 50%;
+        background: #0d6efd;
+        border: 2px solid #fff;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        cursor: pointer;
+    }
+    .handicap-inline-slider::-moz-range-thumb {
+        width: 12px; height: 12px;
+        border-radius: 50%;
+        background: #0d6efd;
+        border: 2px solid #fff;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        cursor: pointer;
+    }`,Qt=h`
+    .badge { position: absolute; bottom: -3px; right: -3px; background: #7a0f1a; color: #fff; font-size: 11px; font-weight: normal; border-radius: 3px; padding: 0 2px; line-height: 1.3; border: 1px solid #fff; min-width: 0;}
+`,He=h`
+    :host { display: inline-flex; align-items: center; align-self: center; font-family: 'Exo', 'Exo Fallback', sans-serif; font-weight: 200; min-width: 0; overflow: hidden; }
+    .badge {
+        display: inline-flex; align-items: center; gap: 4px;
+        padding: 0px 4px 0px 2px; border-radius: 4px;
+        background: var(--surface); border: 1px solid var(--border);
+        cursor: pointer; font-size: 1.2rem; color: var(--text); font-weight: 600;
+        font-family: inherit;
+        transition: filter 0.15s, box-shadow 0.15s;
+        box-shadow: 0 0 10px rgba(100, 255, 131, 0.2);
+        min-width: 0;
+        overflow: hidden;
+        max-width: 100%;
+    }
+    .badge:hover { filter: brightness(1.3); }
+    /* Players who have not chosen a name yet keep the generated "Anon-*" name.
+       A faint green aura draws the eye without being loud. It lives on
+       the host because the host's own overflow: hidden would clip a shadow
+       drawn by the inner .badge. */
+    :host(.anon) { border-radius: 4px; box-shadow: 0 0 3px rgba(100, 255, 131, 0.45), 0 0 7px rgba(100, 255, 131, 0.2); }
+    .dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; background: var(--dot-color, #888); }
+    input {
+        background: transparent; border: none; color: inherit;
+        font-size: inherit; font-family: inherit; font-weight: inherit;
+        outline: none; padding: 0;
+        width: auto;
+        min-width: 0;
+    }
+    .pencil {
+        font-size: 0.95rem;
+        line-height: 1;
+        opacity: 0.8;
+        user-select: none;
+        flex-shrink: 0;
+    }
+`,ei=h`
+    :host { display: block; font-family: 'Exo', 'Exo Fallback', sans-serif; font-weight: 200; }
+    .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 48px)); gap: 0.1rem; justify-content: center; }
+    a { border: none; background: none; cursor: pointer; padding: 0.1rem; border-radius: 4px; display: inline-block; text-decoration: none; color: inherit; width: 100%; box-sizing: border-box; }
+    a:hover { background: var(--btn-hover); }
+    .icon-wrap { position: relative; display: block; width: 100%; }
+    img { display: block; width: 100%; height: auto; margin: auto; }
+`,ti=h`
+    :host { display: block; overflow-y: hidden; font-family: 'Exo', 'Exo Fallback', sans-serif; font-weight: 200; font-size: 0.75rem; color: var(--text); max-height: 40px; opacity: 0; transition: max-height 1s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease-out 0.15s; }
+    /* Capped rather than auto so the reveal can animate. Must clear the tallest
+       layout (a 393px phone: 108px cabinet/HiScore row + 26px MOTD + 413px
+       history/rankings = 547px), otherwise the bottom of the match history
+       boxes is cut off by overflow-y: hidden. */
+    :host(.loaded) { max-height: 640px; opacity: 1; }
+    .tbl { display: inline-block; vertical-align: top; border-radius: 4px; margin: 0.0625rem; overflow: hidden; }
+    table { border-collapse: collapse; width: auto; }
+    th, td { border-bottom: 1px solid var(--border); padding: 0.05rem 0.15rem; text-align: left; }
+    th { display: none; }
+    caption { font-size: 0.8rem; line-height: 1.1; font-weight: 600; text-align: center; padding: 0; color: var(--text-dim); }
+    a { color: var(--link); text-decoration: none; }
+    .ago { text-align: right; font-size: 0.65em; color: var(--text-muted); white-space: nowrap; width: 1%; }
+    .city-col { font-size: 0.65em; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 5rem; }
+    .replay-col { text-align: right; width: 1%; white-space: nowrap; font-size: 0.8rem; }
+    @media (max-width: 600px) {
+        .sagu-hi { display: none; }
+    }
+    @media (max-width: 500px) {
+        .city-col { display: none; }
+    }
+    .loading { color: var(--text-muted); text-align: center; display: block; width: 100%; }
+    .group { margin-bottom: 0.14rem; background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 0.1rem; }
+    .group-title { font-size: 0.75rem; font-weight: 600; color: var(--text-dim); padding: 0.1rem 0.25rem; text-align: center; }
+    .group-body { display: flex; flex-wrap: wrap; justify-content: space-evenly; }
+    /* The trophy cabinet and the HiScore tables share the top row; stretch keeps
+       their bottom borders level. The match history / rankings row below spans
+       the full width. */
+    .top-row { display: flex; align-items: stretch; gap: 0.1rem; }
+    .top-row .cabinet { flex: 0 0 calc(230px * 0.75 - 10px); min-width: 0; }
+    .top-row .hiscores { flex: 1 1 auto; min-width: 0; }
+    /* Narrow screens keep the cabinet beside the HiScores rather than stacking
+       it above; the cabinet shrinks so the tables still get room. */
+    @media (max-width: 640px) {
+        .top-row .cabinet { flex: 0 0 calc(230px * 0.5 - 10px); }
+    }
+    /* The HiScore tables must always sit three-across. A wrapping flex line
+       breaks each item at its max-content width, which varies by engine (table
+       intrinsic sizing, emoji advances) and by reload (the names are live), so
+       the third table randomly folds under on Blink/WebKit. A fixed 3-column
+       grid decides the count up front instead of leaving it to measurement. */
+    .top-row .hiscores .group-body { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); justify-content: space-evenly; justify-items: center; }
+    .top-row .hiscores .tbl { min-width: 0; max-width: 120px; margin: 0.0625rem 0.05rem; }
+    /* Fixed layout lets the columns shrink to the grid track instead of forcing
+       the table out to its max-content width. On a 393px phone each table is
+       88px, so once the trophy emoji and the 40px score column (sized for three
+       digits) have taken their share the name has ~39px - not enough for "AOM"
+       beside a trophy. Rows must stay on one line whatever the name, so the
+       name is left to run a few pixels into the score pill instead of wrapping;
+       the pill paints over the overlap, and the .tbl radius clip trims only a
+       very long name. vertical-align stays middle so the name and its medal sit
+       level with the score pill, which is what the cell default gives for a
+       single-line row. */
+    .top-row .hiscores .tbl table { width: 100%; table-layout: fixed; }
+    .top-row .hiscores td:first-child { white-space: nowrap; vertical-align: middle; }
+    .top-row .hiscores td:last-child { width: 40px; }
+    /* Message of the day, full width under the cabinet and HiScore groups. A
+       touch more vertical padding than .group so a single line of text does not
+       sit against the border. */
+    .motd-row { padding: 0.25rem 0.4rem; }
+    .bottom-row { display: flex; align-items: flex-start; gap: 0.1rem; }
+    /* The bottom-row groups are the last thing in the panel; their .group
+       margin-bottom left a ~2px gap that made the stretched online-panel
+       appear to protrude below them. */
+    .bottom-row .group { margin-bottom: 0; }
+    .bottom-row .recent { flex: 65; min-width: 0; height: 408px; overflow-y: auto; scrollbar-width: none; }
+    .bottom-row .recent::-webkit-scrollbar { display: none; }
+    .bottom-row .top-players { flex: 35; min-width: 0; height: 408px; overflow-y: auto; scrollbar-width: none; }
+    .bottom-row .top-players::-webkit-scrollbar { display: none; }
+    .bottom-row .recent .tbl, .bottom-row .recent table { width: 100%; }
+    .bottom-row .top-players .group-body { flex-direction: column; }
+    .bottom-row .top-players .tbl { width: 100%; display: block; box-sizing: border-box; margin: 0.0625rem 0; }
+    .bottom-row .top-players .tbl table { width: 100%; }
+    .bottom-row .top-players td:last-child { text-align: right; }
+    .recent td:nth-child(1) { width: 16px; text-align: center; }
+    .recent td:nth-child(2) { max-width: 8rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .recent td:nth-child(4) { width: 1%; white-space: nowrap; }
+    .score { color: var(--text-muted); font-size: 0.85em; }
+`,ii=h`
+    :host { display: flex; flex-direction: column; }
+    .panel-header { display: flex; align-items: center; justify-content: center; gap: 0.4rem; margin-bottom: 0.25rem; }
+    .panel-title { font-weight: bold; font-size: 0.8rem; color: var(--text-dim); }
+    .user-name { font-size: 0.75rem; font-weight: 500; white-space: nowrap; color: var(--text); }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: #dc3545; flex-shrink: 0; }
+    .dot.blue { background: #3b82f6; }
+    .dot.green { background: #22c55e; }
+    .dot.on { background: #198754; }
+`,ri=[se,h`
+    /* No min-height: 100%: the app hugs its content so the site-links line in
+       lobby.html sits directly under it instead of below a full-viewport box. */
+    :host { display: flex; flex-direction: column; font-family: 'Exo', 'Exo Fallback', sans-serif; font-weight: 200; font-size: 0.85rem; box-sizing: border-box; padding: 0.25rem; gap: 0.2rem; background: var(--bg); color: var(--text); overflow-y: auto; scrollbar-width: none; }
+    :host::-webkit-scrollbar { display: none; }
+    h1 { font-size: 1.0rem; color: var(--text-dim); text-align: left; margin: 0; letter-spacing: 0.1em; text-transform: uppercase; flex-shrink: 0; }
+    h1 a { color: inherit; text-decoration: none; }
+    h1 a:hover { text-decoration: underline; }
+    h1 .version { font-size: 0.65rem; color: var(--text-dim); margin-left: 0.25rem; vertical-align: super; font-weight: 200; }
+    .topbar { display: flex; align-items: center; flex-shrink: 0; gap: 0.4rem; }
+    .topbar .logo { width: 32px; height: 32px; flex-shrink: 0; filter: grayscale(100%); opacity: 0.7; }
+    .topbrand { display: inline-flex; align-items: center; gap: 0.4rem; text-decoration: none; color: inherit; flex-shrink: 0; }
+    .topbrand:hover { opacity: 0.85; }
+    .topbrand .logo { opacity: 1; transition: opacity 0.2s; }
+    .topbar h1 { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0;}
+    .topbar settings-modal { flex-shrink: 0; }
+    .topbar user-badge { min-width: 0; }
+    .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 0.4rem; overflow: hidden; }
+    .panel-title { font-weight: bold; margin-bottom: 0.25rem; font-size: 0.8rem; color: var(--text-dim); text-align: center; }
+    .info-row { display: flex; flex-direction: column; }
+    .info-row .panel { overflow: visible; }
+
+    main {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 230px;
+        column-gap: 0.1rem;
+        row-gap: 0.14rem;
+        align-items: start;
+    }
+
+    .solo           { grid-area: 1 / 1 / 2 / 2; }
+    online-panel    { grid-area: 1 / 2 / 2 / 3; }
+    online-panel.panel { overflow-y: auto; max-height: calc(100vh - 6rem); align-self: stretch; }
+    .arenas-row     { grid-area: 2 / 1 / 3 / 3; display: flex; flex-direction: column; }
+    .arenas-row .arena-col { min-width: 0; padding: 3px; }
+    .info-row       { grid-area: 3 / 1 / 4 / 3; }
+
+    @media (max-width: 640px) {
+        .info-row { flex-direction: column; }
+    }
+
+    main.has-sidebar {
+        grid-template-columns: 1fr 250px;
+    }
+    main.has-sidebar .solo {
+        grid-area: 1 / 1 / 2 / 2;
+    }
+    main.has-sidebar online-panel {
+        grid-area: 1 / 2 / 4 / 3;
+        overflow-y: auto;
+        align-self: stretch;
+        max-height: none;
+    }
+    main.has-sidebar .arenas-row {
+        grid-area: 2 / 1 / 3 / 2;
+    }
+    main.has-sidebar .info-row {
+        grid-area: 3 / 1 / 4 / 2;
+    }
+    .container { max-width: 900px; margin: 0 auto; width: 100%; display: flex; flex-direction: column; gap: 0.2rem; flex: 1; }
+`];var De=1527,Ge=r=>`v${Math.floor(r/100)}.${String(r%100).padStart(2,"0")}`;var ht=typeof localStorage<"u"&&localStorage.getItem("useProxy")==="true"?"nchanproxy.tailuge.workers.dev":"billiards-network.onrender.com",le=typeof window<"u"&&(window.location.hostname==="localhost"||window.location.hostname==="127.0.0.1"),ni=le?`ws://${window.location.hostname}:80`:`wss://${ht}`;var w=le?"":"https://billiards-network.onrender.com",C=typeof window<"u"&&window.location.hostname.includes("vercel");var si=le?`http://${window.location.hostname}:8080/`:"https://billiards.tailuge.workers.dev/";var pt={eightball:"eightball",snooker:"snooker",threecushion:"threecushion",nineball:"nineball",sagu:"sagu",libre:"libre"},mt={eightball:"\u{1F3B1}",snooker:"\u{1F534}",threecushion:"\u2462",nineball:"\u2468",sagu:"\u2463"},ut={"-club":"\u26E9\uFE0F","-bot":"\u{1F916}","-exam":"\u{1F4DC}","-speedrun":"\u{1F45F}"},gt=r=>{if(r==="reveal")return s`<span title="reveal" aria-label="reveal">\u{1F0A1}</span>`;for(let[t,i]of Object.entries(ut))if(r.endsWith(t)){let o=r.slice(0,-t.length),a=mt[o];if(a)return s`<span title="${r}" aria-label="${r}">${a}${i}</span>`}let e=pt[r];return e?s`<img src="assets/${e}.png" alt="${r}" title="${r}" width="18" height="18" style="vertical-align:middle">`:s`🎱`},Ye=(r,e={})=>s`<span title="${r}">
+    ${gt(r)}${e?.freeaim?"\u2316":""}${Number(e?.tableSize)<10?"\u{1F37C}":""}
+</span>`;var Ke=r=>{let e=(r||"user").slice(0,4),t=/Tauri/i.test(navigator.userAgent)?"-t-":"-";return e+t+Math.random().toString(36).slice(2,6)},bt={ko:"\uD55C"},de=()=>{let[r,...e]=(navigator.languages?.[0]||navigator.language||"en").split("-"),t=bt[(r||"").toLowerCase()];return t?`Anon-${t}`:`Anon-${(e.find(a=>/^[A-Za-z]{2}$/.test(a))||r||"en").toUpperCase().slice(0,2)}`},Ve=r=>(r||"").slice(0,4)==="Anon",ce=class extends EventTarget{constructor(){super();let e=new URLSearchParams(window.location.search),t=(e.get("userId")||"").trim(),i=(e.get("userName")||"").trim();C&&(localStorage.removeItem("userId"),localStorage.removeItem("userName"),localStorage.removeItem("custom"));let o=(localStorage.getItem("userId")||"").trim(),a=(localStorage.getItem("userName")||"").trim();if(t.length>2)this.clientId=t,this.isForcedId=!0;else if(window.self!==window.top&&(location.hostname==="localhost"||location.hostname==="127.0.0.1")&&window.name.includes("-"))this.clientId=window.name,this.isForcedId=!0,i||(this.userName=window.name.split("-")[0]);else{let c=i||a||"",l=!c||o.split("-")[0].slice(0,4)===c.slice(0,4);this.clientId=o.length>2&&!o.startsWith("user-")&&l?o:Ke(c),this.isForcedId=!1,this.clientId!==o&&localStorage.setItem("userId",this.clientId)}this.userName=i||this.userName||a||de(),this.lod=localStorage.getItem("lod")||"4",this.flip=localStorage.getItem("flip")==="true",this.useProxy=localStorage.getItem("useProxy")==="true";try{this.custom=JSON.parse(localStorage.getItem("custom"))||{}}catch{this.custom={}}window.addEventListener("storage",n=>{if(n.key==="custom"){try{this.custom=JSON.parse(n.newValue)||{}}catch{this.custom={}}this.dispatchEvent(new Event("change"))}}),console.log("UserStore identity:",this.userName,this.clientId)}setUseProxy(e){this.useProxy=!!e,localStorage.setItem("useProxy",this.useProxy),this.dispatchEvent(new Event("change")),window.location.reload()}set(e,t){this.clientId=e.trim().length>2?e.trim():Ke(t),this.userName=t.trim(),localStorage.setItem("userId",this.clientId),localStorage.setItem("userName",this.userName),this.dispatchEvent(new Event("change"))}setLod(e){this.lod=e,localStorage.setItem("lod",e),this.dispatchEvent(new Event("change"))}setFlip(e){this.flip=!!e,localStorage.setItem("flip",this.flip),this.dispatchEvent(new Event("change"))}getCustom(){return{...this.custom}}setCustom(e,t){this.custom={...this.custom,[e]:t},localStorage.setItem("custom",JSON.stringify(this.custom)),this.dispatchEvent(new Event("change"))}},b=new ce,I=class extends g{connectedCallback(){super.connectedCallback(),this._storeListener=()=>this.requestUpdate(),b.addEventListener("change",this._storeListener)}disconnectedCallback(){super.disconnectedCallback(),b.removeEventListener("change",this._storeListener)}};var ft=5,qe=1800*1e3,xt=r=>(Math.floor(r/qe)+1)*qe,yt=[{name:"Nine Ball Mini Hourly Arena",ruleType:"nineball",options:{tableSize:"6",freeaim:"true"}},{name:"Eight Ball Mini Hourly Arena",ruleType:"eightball",options:{tableSize:"6",freeaim:"true"}},{name:"Snooker Mini Hourly Arena",ruleType:"snooker",options:{tableSize:"6",reds:"3",freeaim:"true"}},{name:"Sagu Mini Hourly Arena",ruleType:"sagu",options:{raceTo:"5",tableSize:"5",shotClock:"10"}}],vt=[{name:"Sagu Mini Night Arena",ruleType:"sagu",options:{raceTo:"5",tableSize:"5",shotClock:"10"}},{name:"Sagu Night Arena",ruleType:"sagu",options:{raceTo:"5",shotClock:"10"}}],pe=h`
+    .arena-list { display: flex; flex-direction: column; gap: .2rem; }
+    .arena-item { display: flex; align-items: center; gap: .35rem; padding: .25rem; border: 1px solid var(--border); border-radius: 4px; text-decoration: none; color: var(--text); }
+    .arena-item.completed { opacity: .8; padding-top: .25rem; padding-bottom: .25rem; }
+    .arena-item-main { min-width: 0; flex: 1; }
+    .arena-item-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .arena-item-name { font-weight: 400; }
+    .arena-item-meta { color: var(--text-muted); font-size: .72rem; font-weight: 400; white-space: nowrap; }
+    .arena-winner { margin-left: auto; max-width: 35%; overflow: hidden; text-overflow: ellipsis; color: var(--text-muted); font-size: .72rem; white-space: nowrap; flex-shrink: 0; }
+    .arena-join { cursor: pointer; border: none; border-radius: 4px; background-color: #0d6efd; background-image: linear-gradient(180deg, rgb(255 255 255 / 12%), rgb(0 0 0 / 6%)); color: #fff; font: inherit; font-size: .75rem; padding: .15rem .4rem; flex-shrink: 0; box-shadow: inset 0 1px 0 rgb(255 255 255 / 30%), 0 1px 2px rgb(0 0 0 / 20%), 0 2px 6px rgb(13 110 253 / 25%); transition: background-color 0.15s ease, box-shadow 0.15s ease, transform 0.05s ease; }
+    .arena-join:hover { background-color: #0b5ed7; box-shadow: inset 0 1px 0 rgb(255 255 255 / 30%), 0 2px 4px rgb(0 0 0 / 22%), 0 4px 10px rgb(13 110 253 / 30%); }
+    .arena-join:active { transform: translateY(1px); box-shadow: inset 0 1px 2px rgb(0 0 0 / 25%), 0 1px 1px rgb(0 0 0 / 15%); }
+    .arena-join:focus-visible { outline: 2px solid #1e3a8a; outline-offset: 2px; }
+    .empty { color: var(--text-muted); text-align: center; padding: .5rem 0; }
+`,me=(r,e=!1,t=null,i=!0)=>{let o=`lobby.html?tournamentId=${encodeURIComponent(r.id)}`,a=n=>{t?(n.preventDefault(),n.stopPropagation(),t(r.id)):n.currentTarget instanceof HTMLButtonElement&&(n.preventDefault(),window.location.href=n.currentTarget.closest("a").href)};return s`<a class="arena-item ${e?"completed":""}" href=${o} @click=${a}>
+        <div class="arena-item-main"><div class="arena-item-title"><span class="arena-item-name">${Ye(r.ruleType,r.options)}${r.creatorName?s` · ${r.creatorName}`:""}</span><span class="arena-item-meta"> 👥\uFE0E ${r.players.length} · ⏰\uFE0E ${e?"ended":"ends"} ${new Date(r.endTime).toLocaleTimeString([],{hour:"numeric",minute:"2-digit"})}</span></div></div>
+        ${e&&r.winner?s`<span class="arena-winner" title="Winner: ${r.winner}">🏆 ${r.winner}</span>`:""}
+        ${e||!i?"":s`<button class="arena-join btn-challenge" type="button" @click=${a}>Open</button>`}
+    </a>`},he=class extends g{static properties={heading:{type:String},_arenas:{state:!0},_error:{state:!0},selectable:{type:Boolean}};static styles=[pe,h`
+        :host { display: block; }
+        h2.title { margin: 0 0 .25rem; font-size: .8rem; font-weight: 600; }
+        .error { color: var(--text-muted); font-size: .75rem; text-align: center; padding: .5rem 0; }
+    `];constructor(){super(),this.heading="",this._arenas=[],this._error="",this.selectable=!1}connectedCallback(){super.connectedCallback(),this._load()}async load(){await this._load()}async _load(){try{let e=await fetch(`${w}/api/arena`),t=await e.json();if(!e.ok)throw new Error(t.error||`Unable to load Arenas (${e.status})`);let i=Date.now();if(!(t.arenas||[]).some(a=>a.endTime>i&&a.status!=="finished")){let a=xt(i);if(Math.floor((a-i)/6e4)>=ft){let c=new Date(a),l=String(c.getUTCHours()).padStart(2,"0"),p=String(c.getUTCMinutes()).padStart(2,"0"),m=`${c.getUTCFullYear()}${String(c.getUTCMonth()+1).padStart(2,"0")}${String(c.getUTCDate()).padStart(2,"0")}-${l}${p}`,d=c.getUTCMinutes()>=30?1:0,f=new Date(i).getUTCHours()<8?vt:yt,E=(2*c.getUTCHours()+d)%f.length,V=f[E];if(await fetch(`${w}/api/arena`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({id:`arena-hourly-${m}`,creatorId:"hourly-arena",creatorName:V.name,ruleType:V.ruleType,options:V.options,endTime:a})}),e=await fetch(`${w}/api/arena`),t=await e.json(),!e.ok)throw new Error(t.error||`Unable to reload Arenas (${e.status})`)}}this._arenas=(t.arenas||[]).sort((a,n)=>n.createdAt-a.createdAt),this._error="",this.dispatchEvent(new CustomEvent("arenas-loaded",{detail:{arenas:this._arenas},bubbles:!0,composed:!0}))}catch(e){this._error=e.message||"Unable to load Arenas."}}get _activeArenas(){let e=Date.now();return this._arenas.filter(t=>t.endTime>e&&t.status!=="finished")}_onSelect(e){this.dispatchEvent(new CustomEvent("arena-select",{detail:{arenaId:e},bubbles:!0,composed:!0}))}render(){let e=this._activeArenas;return s`
+            ${this.heading?s`<h2 class="title">${this.heading}</h2>`:""}
+            ${this._error&&!e.length?s`<div class="error">Could not load arenas.</div>`:e.length?s`<div class="arena-list" aria-label="Active Arenas">${e.map(t=>me(t,!1,this.selectable?i=>this._onSelect(i):null))}</div>`:s`<div class="empty">No active Arenas.</div>`}
+        `}};customElements.define("active-arenas",he);var ue=[{code:"en",label:"English"},{code:"es",label:"Espa\xF1ol"},{code:"ko",label:"\uD55C\uAD6D\uC5B4"},{code:"ja",label:"\u65E5\u672C\u8A9E"},{code:"tr",label:"T\xFCrk\xE7e"},{code:"zh",label:"\u7E41\u9AD4\u4E2D\u6587",htmlLang:"zh-Hant"}],wt={es:{"Play Solo":"Jugar solo","Play Online":"Jugar en l\xEDnea","Solo Practice":"Pr\xE1ctica en solitario",Spectate:"Observar","Challenge {name}":"Desafiar a {name}",PLAY:"JUGAR",Cancel:"Cancelar",Accept:"Aceptar",Decline:"Rechazar",Challenge:"Desaf\xEDo","Challenge from {name}":"Desaf\xEDo de {name}","Waiting for {name} to accept.":"Esperando a que {name} acepte.","{name} declined.":"{name} rechaz\xF3 el desaf\xEDo.","Accept challenge":"Aceptar desaf\xEDo","Decline challenge":"Rechazar desaf\xEDo",Dismiss:"Cerrar","Select game type":"Seleccionar tipo de juego","Select game variant":"Seleccionar variante de juego","Game type":"Tipo de juego","{game} variant":"Variante de {game}","Table:":"Mesa:","Full size":"Tama\xF1o completo",Mini:"Mini","Shot time:":"Tiempo de tiro:","Rule:":"Regla:","Aim:":"Punter\xEDa:",Free:"Libre",Assist:"Asistida","Free aim":"Punter\xEDa libre","Aim assist":"Punter\xEDa asistida","Send message":"Enviar mensaje",Language:"Idioma","Eight Ball":"Bola 8","Nine Ball":"Bola 9",Snooker:"Snooker","Three Cushion":"Tres bandas",Sagu:"Sagu",Libre:"Libre","Snooker 6r":"Snooker 6r","3-Cushion 5ft":"Tres bandas 5ft","3-Cushion (7)":"Tres bandas (7)","3-Cushion (30)":"Tres bandas (30)","3-Cushion analysis":"An\xE1lisis de tres bandas","Sagu Challenge":"Desaf\xEDo Sagu","Sagu (5)":"Sagu (5)","Billiard collections":"Colecciones de billar",Speedrun:"Contrarreloj",Trickshot:"Fantas\xEDa",Research:"Investigaci\xF3n",Exam:"Examen","Reds 3":"Rojas 3","Reds 6":"Rojas 6","Reds 10":"Rojas 10","Reds 15":"Rojas 15","3 reds":"Rojas 3","6 reds":"Rojas 6","10 reds":"Rojas 10","15 reds":"Rojas 15","Race to 7":"A 7 puntos","Race to 15":"Carrera a 15","Race to 25":"A 25 puntos","Race to 5":"Carrera a 5","Race to 11":"Carrera a 11","Use these parameters":"Usar estos par\xE1metros","Click to change name":"Clic para cambiar el nombre","Customise settings":"Personalizar ajustes",Settings:"Ajustes",Preferences:"Preferencias",Graphics:"Gr\xE1ficos",Customise:"Personalizar",Links:"Enlaces","Recent visitors":"Visitantes recientes",HiScore:"R\xE9cord",Rankings:"Clasificaci\xF3n","Trophy Cabinet":"Vitrina de trofeos","Small Table (15)":"Mesa peque\xF1a (15)","Small Table (11)":"Mesa peque\xF1a (11)","Small Table (5)":"Mesa peque\xF1a (5)","Collaboration (15)":"Cooperativo (15)","Race to 15 (Free Aim)":"A 15 puntos (Tiro libre)","Free Aim (5)":"Punter\xEDa libre (5)","Eight Ball (Free Aim)":"Bola 8 (Punter\xEDa libre)","Eight Ball Mini (Free Aim)":"Bola 8 Mini (Punter\xEDa libre)","Nine Ball (Free Aim)":"Bola 9 (Punter\xEDa libre)","Nine Ball Mini (Free Aim)":"Bola 9 Mini (Punter\xEDa libre)","6 reds (Free Aim)":"Rojas 6 (Punter\xEDa libre)","Traditional (10)":"Tradicional (10)",Handicap:"Puntuaci\xF3n personalizada"},ko:{"Play Solo":"\uD63C\uC790 \uD50C\uB808\uC774","Play Online":"\uC628\uB77C\uC778 \uD50C\uB808\uC774","Solo Practice":"\uD63C\uC790 \uC5F0\uC2B5",Spectate:"\uAD00\uC804","Challenge {name}":"{name}\uC5D0\uAC8C \uB300\uACB0 \uC2E0\uCCAD",PLAY:"\uD50C\uB808\uC774",Cancel:"\uCDE8\uC18C",Accept:"\uC218\uB77D",Decline:"\uAC70\uC808",Challenge:"\uB3C4\uC804","Challenge from {name}":"{name}\uB2D8\uC758 \uB3C4\uC804","Waiting for {name} to accept.":"{name}\uB2D8\uC758 \uC218\uB77D\uC744 \uAE30\uB2E4\uB9AC\uB294 \uC911.","{name} declined.":"{name}\uB2D8\uC774 \uAC70\uC808\uD588\uC2B5\uB2C8\uB2E4.","Accept challenge":"\uB3C4\uC804 \uC218\uB77D","Decline challenge":"\uB3C4\uC804 \uAC70\uC808",Dismiss:"\uB2EB\uAE30","Select game type":"\uAC8C\uC784 \uC720\uD615 \uC120\uD0DD","Select game variant":"\uAC8C\uC784 \uBCC0\uD615 \uC120\uD0DD","Game type":"\uAC8C\uC784 \uC885\uB958","{game} variant":"{game} \uBCC0\uD615","Table:":"\uD14C\uC774\uBE14:","Full size":"\uC804\uCCB4 \uD06C\uAE30",Mini:"\uBBF8\uB2C8","Shot time:":"\uC0F7 \uC2DC\uAC04:","Rule:":"\uADDC\uCE59:","Aim:":"\uC870\uC900:",Free:"\uC790\uC720",Assist:"\uBCF4\uC870","Free aim":"\uC790\uC720 \uC870\uC900","Aim assist":"\uC870\uC900 \uBCF4\uC870","Send message":"\uBA54\uC2DC\uC9C0 \uBCF4\uB0B4\uAE30",Language:"\uC5B8\uC5B4","Eight Ball":"\uC5D0\uC774\uD2B8\uBCFC","Nine Ball":"\uB098\uC778\uBCFC",Snooker:"\uC2A4\uB204\uCEE4","Three Cushion":"\uC4F0\uB9AC\uCFE0\uC158",Sagu:"\uC0AC\uAD6C",Libre:"\uB9AC\uBE0C\uB808","Snooker 6r":"\uC2A4\uB204\uCEE4 6r","3-Cushion 5ft":"\uC4F0\uB9AC\uCFE0\uC158 5ft","3-Cushion (7)":"\uC4F0\uB9AC\uCFE0\uC158 (7)","3-Cushion (30)":"\uC4F0\uB9AC\uCFE0\uC158 (30)","3-Cushion analysis":"\uC4F0\uB9AC\uCFE0\uC158 \uBD84\uC11D","Sagu Challenge":"\uC0AC\uAD6C \uB3C4\uC804","Sagu (5)":"\uC0AC\uAD6C (5)","Billiard collections":"\uB2F9\uAD6C \uCEEC\uB809\uC158",Speedrun:"\uC2A4\uD53C\uB4DC\uB7F0",Trickshot:"\uD2B8\uB9AD\uC0F7",Research:"\uC5F0\uAD6C",Exam:"\uC2DC\uD5D8","Reds 3":"\uBE68\uAC04\uACF5 3","Reds 6":"\uBE68\uAC04\uACF5 6","Reds 10":"\uBE68\uAC04\uACF5 10","Reds 15":"\uBE68\uAC04\uACF5 15","3 reds":"\uBE68\uAC04\uACF5 3","6 reds":"\uBE68\uAC04\uACF5 6","10 reds":"\uBE68\uAC04\uACF5 10","15 reds":"\uBE68\uAC04\uACF5 15","Race to 7":"7\uC810 \uC120\uCDE8","Race to 15":"15\uC810 \uC120\uCDE8","Race to 25":"25\uC810 \uC120\uCDE8","Race to 5":"5\uC810 \uC120\uCDE8","Race to 11":"11\uC810 \uC120\uCDE8","Use these parameters":"\uC774 \uC124\uC815\uC73C\uB85C \uC2DC\uC791","Click to change name":"\uD074\uB9AD\uD558\uC5EC \uC774\uB984 \uBCC0\uACBD","Customise settings":"\uC124\uC815 \uBCC0\uACBD",Settings:"\uC124\uC815",Preferences:"\uD658\uACBD\uC124\uC815",Graphics:"\uADF8\uB798\uD53D",Customise:"\uC0AC\uC6A9\uC790 \uC9C0\uC815",Links:"\uB9C1\uD06C","Recent visitors":"\uCD5C\uADFC \uBC29\uBB38\uC790",HiScore:"\uD558\uC774\uC2A4\uCF54\uC5B4",Rankings:"\uB7AD\uD0B9","Trophy Cabinet":"\uD2B8\uB85C\uD53C \uC9C4\uC5F4\uC7A5","Small Table (15)":"\uBBF8\uB2C8 \uD14C\uC774\uBE14 (15)","Small Table (11)":"\uBBF8\uB2C8 \uD14C\uC774\uBE14 (11)","Small Table (5)":"\uBBF8\uB2C8 \uD14C\uC774\uBE14 (5)","Collaboration (15)":"\uD611\uB825\uC804 (15)","Race to 15 (Free Aim)":"15\uC810 \uC120\uCDE8 (\uC790\uC720 \uC870\uC900)","Free Aim (5)":"\uC790\uC720 \uC870\uC900 (5)","Eight Ball (Free Aim)":"\uC5D0\uC774\uD2B8\uBCFC (\uC790\uC720 \uC870\uC900)","Eight Ball Mini (Free Aim)":"\uC5D0\uC774\uD2B8\uBCFC \uBBF8\uB2C8 (\uC790\uC720 \uC870\uC900)","Nine Ball (Free Aim)":"\uB098\uC778\uBCFC (\uC790\uC720 \uC870\uC900)","Nine Ball Mini (Free Aim)":"\uB098\uC778\uBCFC \uBBF8\uB2C8 (\uC790\uC720 \uC870\uC900)","6 reds (Free Aim)":"\uBE68\uAC04\uACF5 6 (\uC790\uC720 \uC870\uC900)","Traditional (10)":"\uC815\uC2DD \uADDC\uCE59 (10)",Handicap:"\uD578\uB514\uCEA1"},ja:{"Play Solo":"\u3072\u3068\u308A\u3067\u30D7\u30EC\u30A4","Play Online":"\u30AA\u30F3\u30E9\u30A4\u30F3\u3067\u30D7\u30EC\u30A4","Solo Practice":"\u30BD\u30ED\u7DF4\u7FD2",Spectate:"\u89B3\u6226","Challenge {name}":"{name}\u306B\u6311\u6226",PLAY:"\u30D7\u30EC\u30A4",Cancel:"\u30AD\u30E3\u30F3\u30BB\u30EB",Accept:"\u627F\u8A8D",Decline:"\u62D2\u5426",Challenge:"\u5BFE\u6226\u7533\u8FBC\u307F","Challenge from {name}":"{name}\u304B\u3089\u306E\u6311\u6226","Waiting for {name} to accept.":"{name}\u306E\u627F\u8A8D\u5F85\u3061\u3067\u3059\u3002","{name} declined.":"{name}\u304C\u62D2\u5426\u3057\u307E\u3057\u305F\u3002","Accept challenge":"\u6311\u6226\u3092\u627F\u8A8D","Decline challenge":"\u6311\u6226\u3092\u62D2\u5426",Dismiss:"\u9589\u3058\u308B","Select game type":"\u30B2\u30FC\u30E0\u306E\u7A2E\u985E\u3092\u9078\u629E","Select game variant":"\u30B2\u30FC\u30E0\u306E\u30D0\u30EA\u30A2\u30F3\u30C8\u3092\u9078\u629E","Game type":"\u30B2\u30FC\u30E0\u306E\u7A2E\u985E","{game} variant":"{game}\u306E\u30D0\u30EA\u30A2\u30F3\u30C8","Table:":"\u30C6\u30FC\u30D6\u30EB:","Full size":"\u30D5\u30EB\u30B5\u30A4\u30BA",Mini:"\u30DF\u30CB","Shot time:":"\u30B7\u30E7\u30C3\u30C8\u6642\u9593:","Rule:":"\u30EB\u30FC\u30EB:","Aim:":"\u30A8\u30A4\u30E0:",Free:"\u30D5\u30EA\u30FC",Assist:"\u30A2\u30B7\u30B9\u30C8","Free aim":"\u30D5\u30EA\u30FC\u30A8\u30A4\u30E0","Aim assist":"\u30A8\u30A4\u30E0\u30A2\u30B7\u30B9\u30C8","Send message":"\u30E1\u30C3\u30BB\u30FC\u30B8\u3092\u9001\u308B",Language:"\u8A00\u8A9E","Eight Ball":"\u30A8\u30A4\u30C8\u30DC\u30FC\u30EB","Nine Ball":"\u30CA\u30A4\u30F3\u30DC\u30FC\u30EB",Snooker:"\u30B9\u30CC\u30FC\u30AB\u30FC","Three Cushion":"\u30B9\u30EA\u30FC\u30AF\u30C3\u30B7\u30E7\u30F3",Sagu:"\u56DB\u7403",Libre:"\u30EA\u30D6\u30EC","Snooker 6r":"\u30B9\u30CC\u30FC\u30AB\u30FC 6r","3-Cushion 5ft":"\u30B9\u30EA\u30FC\u30AF\u30C3\u30B7\u30E7\u30F3 5ft","3-Cushion (7)":"\u30B9\u30EA\u30FC\u30AF\u30C3\u30B7\u30E7\u30F3 (7)","3-Cushion (30)":"\u30B9\u30EA\u30FC\u30AF\u30C3\u30B7\u30E7\u30F3 (30)","3-Cushion analysis":"\u30B9\u30EA\u30FC\u30AF\u30C3\u30B7\u30E7\u30F3\u5206\u6790","Sagu Challenge":"\u56DB\u3064\u7403\u30C1\u30E3\u30EC\u30F3\u30B8","Sagu (5)":"\u56DB\u7403 (5)","Billiard collections":"\u30D3\u30EA\u30E4\u30FC\u30C9\u30B3\u30EC\u30AF\u30B7\u30E7\u30F3",Speedrun:"\u30B9\u30D4\u30FC\u30C9\u30E9\u30F3",Trickshot:"\u30C8\u30EA\u30C3\u30AF\u30B7\u30E7\u30C3\u30C8",Research:"\u7814\u7A76",Exam:"\u691C\u5B9A","Reds 3":"\u8D64\u7403 3","Reds 6":"\u8D64\u7403 6","Reds 10":"\u8D64\u7403 10","Reds 15":"\u8D64\u7403 15","3 reds":"\u8D64\u7403 3","6 reds":"\u8D64\u7403 6","10 reds":"\u8D64\u7403 10","15 reds":"\u8D64\u7403 15","Race to 7":"7\u70B9\u5148\u53D6","Race to 15":"15\u70B9\u5148\u53D6","Race to 25":"25\u70B9\u5148\u53D6","Race to 5":"5\u70B9\u5148\u53D6","Race to 11":"11\u70B9\u5148\u53D6","Use these parameters":"\u3053\u306E\u8A2D\u5B9A\u3067\u958B\u59CB","Click to change name":"\u30AF\u30EA\u30C3\u30AF\u3057\u3066\u540D\u524D\u3092\u5909\u66F4","Customise settings":"\u8A2D\u5B9A\u3092\u30AB\u30B9\u30BF\u30DE\u30A4\u30BA",Settings:"\u8A2D\u5B9A",Preferences:"\u74B0\u5883\u8A2D\u5B9A",Graphics:"\u30B0\u30E9\u30D5\u30A3\u30C3\u30AF\u30B9",Customise:"\u30AB\u30B9\u30BF\u30DE\u30A4\u30BA",Links:"\u30EA\u30F3\u30AF","Recent visitors":"\u6700\u8FD1\u306E\u8A2A\u554F\u8005",HiScore:"\u30CF\u30A4\u30B9\u30B3\u30A2",Rankings:"\u30E9\u30F3\u30AD\u30F3\u30B0","Trophy Cabinet":"\u30C8\u30ED\u30D5\u30A3\u30FC\u30AD\u30E3\u30D3\u30CD\u30C3\u30C8","Small Table (15)":"\u30DF\u30CB\u30C6\u30FC\u30D6\u30EB (15)","Small Table (11)":"\u30DF\u30CB\u30C6\u30FC\u30D6\u30EB (11)","Small Table (5)":"\u30DF\u30CB\u30C6\u30FC\u30D6\u30EB (5)","Collaboration (15)":"\u5354\u529B\u6226 (15)","Race to 15 (Free Aim)":"15\u70B9\u5148\u53D6\uFF08\u30D5\u30EA\u30FC\u30A8\u30A4\u30E0\uFF09","Free Aim (5)":"\u30D5\u30EA\u30FC\u30A8\u30A4\u30E0 (5)","Eight Ball (Free Aim)":"\u30A8\u30A4\u30C8\u30DC\u30FC\u30EB\uFF08\u30D5\u30EA\u30FC\u30A8\u30A4\u30E0\uFF09","Eight Ball Mini (Free Aim)":"\u30A8\u30A4\u30C8\u30DC\u30FC\u30EB \u30DF\u30CB\uFF08\u30D5\u30EA\u30FC\u30A8\u30A4\u30E0\uFF09","Nine Ball (Free Aim)":"\u30CA\u30A4\u30F3\u30DC\u30FC\u30EB\uFF08\u30D5\u30EA\u30FC\u30A8\u30A4\u30E0\uFF09","Nine Ball Mini (Free Aim)":"\u30CA\u30A4\u30F3\u30DC\u30FC\u30EB \u30DF\u30CB\uFF08\u30D5\u30EA\u30FC\u30A8\u30A4\u30E0\uFF09","6 reds (Free Aim)":"\u8D64\u7403 6\uFF08\u30D5\u30EA\u30FC\u30A8\u30A4\u30E0\uFF09","Traditional (10)":"\u901A\u5E38\u30EB\u30FC\u30EB (10)",Handicap:"\u76EE\u6A19\u70B9\u6570\u8A2D\u5B9A"},tr:{"Play Solo":"Tek Oyna","Play Online":"\xC7evrimi\xE7i Oyna","Solo Practice":"Solo Pratik",Spectate:"\u0130zle","Challenge {name}":"{name} ile D\xFCello",PLAY:"OYNA",Cancel:"\u0130ptal",Accept:"Kabul Et",Decline:"Reddet",Challenge:"D\xFCello","Challenge from {name}":"{name} d\xFCello teklif etti","Waiting for {name} to accept.":"{name} kabul edene kadar bekleniyor.","{name} declined.":"{name} reddetti.","Accept challenge":"D\xFCelloyu kabul et","Decline challenge":"D\xFCelloyu reddet",Dismiss:"Kapat","Select game type":"Oyun t\xFCr\xFCn\xFC se\xE7","Select game variant":"Oyun varyant\u0131 se\xE7","Game type":"Oyun t\xFCr\xFC","{game} variant":"{game} varyant\u0131","Table:":"Masa:","Full size":"Tam boy",Mini:"Mini","Shot time:":"At\u0131\u015F s\xFCresi:","Rule:":"Kural:","Aim:":"Ni\u015Fan:",Free:"Serbest",Assist:"Yard\u0131ml\u0131","Free aim":"Serbest ni\u015Fan","Aim assist":"Ni\u015Fan yard\u0131m\u0131","Send message":"Mesaj g\xF6nder",Language:"Dil","Eight Ball":"Sekiz Top","Nine Ball":"Dokuz Top",Snooker:"Snooker","Three Cushion":"\xDC\xE7 Bant",Sagu:"Sagu",Libre:"Serbest","Snooker 6r":"Snooker 6r","3-Cushion 5ft":"\xDC\xE7 Bant 5ft","3-Cushion (7)":"\xDC\xE7 Bant (7)","3-Cushion (30)":"\xDC\xE7 Bant (30)","3-Cushion analysis":"\xDC\xE7 Bant analizi","Sagu Challenge":"Sagu Challenge","Sagu (5)":"Sagu (5)","Billiard collections":"Bilardo koleksiyonlar\u0131",Speedrun:"Speedrun",Trickshot:"Trickshot",Research:"Ara\u015Ft\u0131rma",Exam:"S\u0131nav","Reds 3":"3 K\u0131rm\u0131z\u0131","Reds 6":"6 K\u0131rm\u0131z\u0131","Reds 10":"10 K\u0131rm\u0131z\u0131","Reds 15":"15 K\u0131rm\u0131z\u0131","3 reds":"3 K\u0131rm\u0131z\u0131","6 reds":"6 K\u0131rm\u0131z\u0131","10 reds":"10 K\u0131rm\u0131z\u0131","15 reds":"15 K\u0131rm\u0131z\u0131","Race to 7":"7 Say\u0131ya Ula\u015F","Race to 15":"15 Say\u0131ya","Race to 25":"25 Say\u0131ya Ula\u015F","Race to 5":"5 Say\u0131ya","Race to 11":"11 Say\u0131ya","Use these parameters":"Bu ayarlarla ba\u015Fla","Click to change name":"\u0130smi de\u011Fi\u015Ftirmek i\xE7in t\u0131klay\u0131n","Customise settings":"Ayarlar\u0131 \xF6zelle\u015Ftir",Settings:"Ayarlar",Preferences:"Tercihler",Graphics:"Grafikler",Customise:"\xD6zelle\u015Ftir",Links:"Ba\u011Flant\u0131lar","Recent visitors":"Son ziyaret\xE7iler",HiScore:"Rekor",Rankings:"S\u0131ralama","Trophy Cabinet":"Kupa Dolab\u0131","Small Table (15)":"K\xFC\xE7\xFCk Masa (15)","Small Table (11)":"K\xFC\xE7\xFCk Masa (11)","Small Table (5)":"K\xFC\xE7\xFCk Masa (5)","Collaboration (15)":"\u0130\u015Fbirli\u011Fi (15)","Race to 15 (Free Aim)":"15 Say\u0131ya Ula\u015F (Serbest Ni\u015Fan)","Free Aim (5)":"Serbest Ni\u015Fan (5)","Eight Ball (Free Aim)":"Sekiz Top (Serbest Ni\u015Fan)","Eight Ball Mini (Free Aim)":"Sekiz Top Mini (Serbest Ni\u015Fan)","Nine Ball (Free Aim)":"Dokuz Top (Serbest Ni\u015Fan)","Nine Ball Mini (Free Aim)":"Dokuz Top Mini (Serbest Ni\u015Fan)","6 reds (Free Aim)":"6 K\u0131rm\u0131z\u0131 (Serbest Ni\u015Fan)","Traditional (10)":"Geleneksel (10)",Handicap:"Hedef Puan\u0131"},zh:{"Play Solo":"\u55AE\u4EBA\u7DF4\u7FD2","Play Online":"\u7DDA\u4E0A\u5C0D\u6230","Solo Practice":"\u55AE\u4EBA\u7DF4\u7FD2",Spectate:"\u89C0\u6230","Challenge {name}":"\u6311\u6230 {name}",PLAY:"\u958B\u59CB",Cancel:"\u53D6\u6D88",Accept:"\u63A5\u53D7",Decline:"\u62D2\u7D55",Challenge:"\u6311\u6230","Challenge from {name}":"{name} \u7684\u6311\u6230","Waiting for {name} to accept.":"\u7B49\u5F85 {name} \u63A5\u53D7\u3002","{name} declined.":"{name} \u62D2\u7D55\u4E86\u3002","Accept challenge":"\u63A5\u53D7\u6311\u6230","Decline challenge":"\u62D2\u7D55\u6311\u6230",Dismiss:"\u95DC\u9589","Select game type":"\u9078\u64C7\u7403\u985E","Select game variant":"\u9078\u64C7\u73A9\u6CD5","Game type":"\u7403\u985E","{game} variant":"{game} \u73A9\u6CD5","Table:":"\u7403\u684C\uFF1A","Full size":"\u6A19\u6E96\u684C",Mini:"\u8FF7\u4F60","Shot time:":"\u51FA\u687F\u6642\u9593\uFF1A","Rule:":"\u898F\u5247\uFF1A","Aim:":"\u7784\u6E96\uFF1A",Free:"\u81EA\u7531",Assist:"\u8F14\u52A9","Free aim":"\u81EA\u7531\u7784\u6E96","Aim assist":"\u7784\u6E96\u8F14\u52A9","Send message":"\u50B3\u9001\u8A0A\u606F",Language:"\u8A9E\u8A00","Eight Ball":"\u516B\u865F\u7403","Nine Ball":"\u4E5D\u865F\u7403",Snooker:"\u65AF\u8AFE\u514B","Three Cushion":"\u4E09\u9846\u661F",Sagu:"\u56DB\u7403",Libre:"\u81EA\u7531\u7403","Snooker 6r":"\u65AF\u8AFE\u514B 6r","3-Cushion 5ft":"\u4E09\u9846\u661F 5ft","3-Cushion (7)":"\u4E09\u9846\u661F (7)","3-Cushion (30)":"\u4E09\u9846\u661F (30)","3-Cushion analysis":"\u4E09\u9846\u661F\u5206\u6790","Sagu Challenge":"\u56DB\u7403\u6311\u6230","Sagu (5)":"\u56DB\u7403 (5)","Billiard collections":"\u649E\u7403\u6536\u85CF",Speedrun:"\u901F\u901A",Trickshot:"\u82B1\u5F0F\u64CA\u7403",Research:"\u7814\u7A76",Exam:"\u6AA2\u5B9A","Reds 3":"\u7D05\u7403 3","Reds 6":"\u7D05\u7403 6","Reds 10":"\u7D05\u7403 10","Reds 15":"\u7D05\u7403 15","3 reds":"\u7D05\u7403 3","6 reds":"\u7D05\u7403 6","10 reds":"\u7D05\u7403 10","15 reds":"\u7D05\u7403 15","Race to 7":"\u6436 7 \u5206","Race to 15":"\u6436 15","Race to 25":"\u6436 25 \u5206","Race to 5":"\u6436 5","Race to 11":"\u6436 11","Use these parameters":"\u4F7F\u7528\u9019\u4E9B\u8A2D\u5B9A","Click to change name":"\u9EDE\u64CA\u4FEE\u6539\u540D\u7A31","Customise settings":"\u81EA\u8A02\u8A2D\u5B9A",Settings:"\u8A2D\u5B9A",Preferences:"\u504F\u597D\u8A2D\u5B9A",Graphics:"\u5716\u5F62",Customise:"\u81EA\u8A02",Links:"\u9023\u7D50","Recent visitors":"\u6700\u8FD1\u8A2A\u5BA2",HiScore:"\u6700\u9AD8\u5206",Rankings:"\u6392\u540D","Trophy Cabinet":"\u734E\u76C3\u6AC3","Small Table (15)":"\u8FF7\u4F60\u7403\u684C (15)","Small Table (11)":"\u8FF7\u4F60\u7403\u684C (11)","Small Table (5)":"\u8FF7\u4F60\u7403\u684C (5)","Collaboration (15)":"\u5408\u4F5C\u6A21\u5F0F (15)","Race to 15 (Free Aim)":"\u6436 15 \u5206\uFF08\u81EA\u7531\u7784\u6E96\uFF09","Free Aim (5)":"\u81EA\u7531\u7784\u6E96 (5)","Eight Ball (Free Aim)":"\u516B\u865F\u7403\uFF08\u81EA\u7531\u7784\u6E96\uFF09","Eight Ball Mini (Free Aim)":"\u516B\u865F\u7403 \u8FF7\u4F60\uFF08\u81EA\u7531\u7784\u6E96\uFF09","Nine Ball (Free Aim)":"\u4E5D\u865F\u7403\uFF08\u81EA\u7531\u7784\u6E96\uFF09","Nine Ball Mini (Free Aim)":"\u4E5D\u865F\u7403 \u8FF7\u4F60\uFF08\u81EA\u7531\u7784\u6E96\uFF09","6 reds (Free Aim)":"\u7D05\u7403 6\uFF08\u81EA\u7531\u7784\u6E96\uFF09","Traditional (10)":"\u6A19\u6E96\u898F\u5247 (10)",Handicap:"\u8B93\u5206\u5236"}},_t="locale",St=["locale","selector_lang"];try{for(let r of St)localStorage.removeItem(r)}catch{}var be=r=>ue.some(e=>e.code===r);function $t(){if(!(typeof location>"u"))return new URLSearchParams(location.search).get(_t)?.trim().toLowerCase()||void 0}function kt(){if(typeof navigator>"u")return;let r=navigator.languages?.length?navigator.languages:[navigator.language];for(let e of r){let t=String(e).toLowerCase().split("-")[0];if(be(t))return t}}function At(){let r=$t();return r?be(r)?r:"en":kt()??"en"}var ge=class{#t=At();#i=new Set;constructor(){this.#r()}get lang(){return this.#t}get languages(){return ue}t(e,t){let i=wt[this.#t]?.[e]??e;if(t)for(let[o,a]of Object.entries(t))i=i.replaceAll(`{${o}}`,String(a));return i}set(e){if(!(!be(e)||e===this.#t)){this.#t=e,this.#r();for(let t of this.#i)t(e)}}onChange(e){return this.#i.add(e),()=>this.#i.delete(e)}#r(){if(typeof document>"u")return;let{htmlLang:e}=ue.find(t=>t.code===this.#t)??{};document.documentElement.lang=e??this.#t}},F=new ge,Y=class extends I{connectedCallback(){super.connectedCallback(),this._i18nUnsub=F.onChange(()=>this.requestUpdate())}disconnectedCallback(){super.disconnectedCallback(),this._i18nUnsub?.()}};var Ct=[[4352,4447,1],[11904,42191,1],[44032,55203,1],[63744,64255,1],[65040,65135,1],[65280,65376,1],[65504,65510,1],[127744,129791,1.25],[131072,195103,1]],We=r=>{let e=0,t=0;for(let i of r){let o=i.codePointAt(0),a=Ct.find(([n,c])=>o>=n&&o<=c);a?t+=a[2]:e++}return!e&&!t&&(e=1),`calc(${e}ch + ${+t.toFixed(2)}em)`},fe=class extends Y{static properties={_dotColor:{state:!0}};static styles=He;constructor(){super(),this._clientId=b.clientId,this._name=b.userName,this._dotColor=b.isForcedId?"#9fca10ff":"#4caf50"}_commit(e){let t=e.trim().slice(0,12)||de();this._name=t,b.set(this._clientId,t),this.dispatchEvent(new CustomEvent("user-name-changed",{bubbles:!0,composed:!0,detail:{userId:this._clientId,userName:t}}))}_onBadgeClick(e){let t=this.renderRoot?.querySelector("input");t&&e.target!==t&&t.focus()}_onKeydown(e){e.key==="Enter"&&(e.preventDefault(),!(e.isComposing||e.keyCode===229)&&e.target.blur())}render(){if(C)return s``;let e=b.userName,t=Ve(e),i=t?F.t("Click to change name"):void 0;return this.classList.toggle("anon",t),s`
+            <div class="badge" style="--dot-color:${this._dotColor}" title=${i} @click=${this._onBadgeClick}>
+                <span class="dot"></span>
+                <input size="1" maxlength="12" .value=${e}
+                    name="name" autocomplete="nickname"
+                    style="width: ${We(e)}"
+                    aria-label="Display name"
+                    @input=${o=>o.target.style.width=We(o.target.value)}
+                    @change=${o=>this._commit(o.target.value)}
+                    @keydown=${this._onKeydown}>
+                ${t?s`<span class="pencil">🖉</span>`:""}
+            </div>`}};customElements.define("user-badge",fe);var K=null,Et=()=>(K||(K=fetch(`${w}/api/arena/winners`).then(r=>r.ok?r.json():Promise.reject(new Error(String(r.status)))).then(r=>Array.isArray(r?.winners)?r.winners.filter(e=>e&&typeof e=="object"&&typeof e.userName=="string"):[]).catch(()=>(K=null,null))),K),xe=class extends I{static styles=h`
+        :host { position: relative; display: inline-flex; width: 0; min-width: 0; }
+        .trophy-stack {
+            position: absolute;
+            right: -0.1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: row;
+            gap: 0.05rem;
+            /* stack grows leftward from the badge */
+            flex-direction: row-reverse;
+        }
+        .trophy {
+            font-size: 0.95rem; line-height: 1;
+            user-select: none;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .trophy:hover { opacity: 0.8; }
+    `;constructor(){super(),this._trophies=[],this._trophyCheckedFor=null,this._winners=null,this._observer=null,this._idleTimer=null,this._started=!1}connectedCallback(){super.connectedCallback(),C||this._startLazy()}disconnectedCallback(){this._observer?.disconnect(),this._observer=null,this._idleTimer&&(clearTimeout(this._idleTimer),this._idleTimer=null),super.disconnectedCallback()}_startLazy(){this._started||(this._started=!0,typeof IntersectionObserver<"u"?(this._observer=new IntersectionObserver(e=>{e.some(t=>t.isIntersecting)&&(this._observer.disconnect(),this._observer=null,this._load())}),this._observer.observe(this)):this._whenIdle(()=>this._load()))}_whenIdle(e){typeof requestIdleCallback=="function"?requestIdleCallback(()=>e()):this._idleTimer=setTimeout(e,200)}async _load(){this._winners=await Et(),this._recheck()}_recheck(){let e=(b.userName||"").trim();if(!e||!this._winners){this._trophies.length&&(this._trophies=[],this.requestUpdate());return}if(this._trophyCheckedFor===e)return;this._trophyCheckedFor=e;let t=this._winners.filter(i=>typeof i.userName=="string"&&i.userName.trim()===e);JSON.stringify(t)!==JSON.stringify(this._trophies)&&(this._trophies=t,this.requestUpdate())}willUpdate(){this._recheck()}render(){return C||!this._trophies.length?s``:s`
+            <span class="trophy-stack">
+                ${this._trophies.map(e=>s`
+                    <a
+                        class="trophy"
+                        href="lobby?arenaId=${encodeURIComponent(e.arenaId)}"
+                        rel="nofollow"
+                        title="Arena winner (${e.arenaId})"
+                        aria-label="Arena trophy - view arena ${e.arenaId}"
+                    >🏆</a>
+                `)}
+            </span>
+        `}};customElements.define("trophy-item",xe);var B=[{key:"eightball",label:"Eight Ball",img:"assets/eightball.png",freeaim:!0,variants:[{id:"std",short:"",label:"Eight Ball",options:{}}]},{key:"nineball",label:"Nine Ball",img:"assets/nineball.png",freeaim:!0,variants:[{id:"std",short:"",label:"Nine Ball",options:{}}]},{key:"snooker",label:"Snooker",img:"assets/snooker.png",freeaim:!0,variants:[{id:"3",short:"Reds 3",label:"Reds 3",options:{reds:"3"}},{id:"6",short:"Reds 6",label:"Reds 6",options:{reds:"6"}},{id:"10",short:"Reds 10",label:"Reds 10",options:{reds:"10"}},{id:"15",short:"Reds 15",label:"Reds 15",options:{reds:"15"}}],sizes:!0},{key:"threecushion",label:"Three Cushion",img:"assets/threecushion.png",freeaim:!0,variants:[{id:"7",short:"Race to 7",label:"Race to 7",options:{raceTo:"7"}},{id:"15",short:"Race to 15",label:"Race to 15",options:{raceTo:"15"}},{id:"25",short:"Race to 25",label:"Race to 25",options:{raceTo:"25"}}],sizes:!0},{key:"sagu",label:"Sagu",img:"assets/sagu.png",freeaim:!0,variants:[{id:"5",short:"Race to 5",label:"Race to 5",options:{raceTo:"5"}},{id:"11",short:"Race to 11",label:"Race to 11",options:{raceTo:"11"}}],sizes:!0}];for(let r of B)r.sizes=!0;var Je=["10","20","60"],Ze="20",x={get(r,e){let t=localStorage.getItem(`selector_${r}`);return t===null?e:t},set(r,e){localStorage.setItem(`selector_${r}`,e)}},ye=(r,e,t)=>r.dispatchEvent(new CustomEvent(e,{detail:t,bubbles:!0,composed:!0})),ve=class extends g{static properties={mode:{type:String},opponent:{type:String},open:{type:Boolean,reflect:!0},heading:{type:String},actionLabel:{type:String},_sel:{state:!0},_freeaim:{state:!0},_vid:{state:!0},_size:{state:!0},_shotClock:{state:!0},_lang:{state:!0}};#t=F;#i;#r=e=>{e.key==="Escape"&&this.open&&this.hide()};static styles=h`
+    :host {
+      display: block;
+      font-family: 'Exo', sans-serif;
+      font-weight: 200;
+      color: var(--text);
+      /* Accent matches the lobby's semantic buttons (.btn-challenge). */
+      --accent: #0d6efd;
+      --accent-hover: #0b5ed7;
+      --accent-active: #0a58ca;
+      --accent-tint: rgba(13, 110, 253, 0.12);
+    }
+    :host(:not([open])) { display: none; }
+
+    /* Button baseline mirrors SHARED_STYLES: flat, 4px radius, --btn-* tokens.
+       Only the touch target is enlarged for mobile comfort. */
+    button {
+      font: inherit;
+      cursor: pointer;
+      border-radius: 4px;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      user-select: none;
+      background: var(--btn-bg);
+      border: 1px solid var(--btn-border);
+      color: var(--text);
+      transition: background-color 0.2s, border-color 0.2s, color 0.2s, opacity 0.2s,
+        transform 0.15s ease, box-shadow 0.2s;
+    }
+    button:hover { background-color: var(--btn-hover); }
+    button:active { background-color: var(--btn-active); }
+    button:focus-visible, input:focus-visible, a:focus-visible {
+      outline: 2px solid #007bff;
+      outline-offset: 2px;
+    }
+    /* Semantic accent buttons follow .btn-challenge's hover/active ramp. */
+    .action, .chip.selected, .chip.toggle.on {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+    .action:hover, .chip.selected:hover, .chip.toggle.on:hover {
+      background: var(--accent-hover);
+      border-color: var(--accent-active);
+    }
+    .action:active, .chip.selected:active, .chip.toggle.on:active {
+      background: var(--accent-active);
+      border-color: var(--accent-active);
+    }
+
+    .backdrop {
+      position: fixed; inset: 0;
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(1px);
+      -webkit-backdrop-filter: blur(1px);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 100;
+      padding: 0.75rem;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      animation: backdropIn 0.16s ease-out;
+    }
+    .modal {
+      box-sizing: border-box;
+      background: var(--modal-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      /* Side padding is kept minimal so the tiles, option rows and the action
+         button run nearly the full width of the dialog. */
+      padding: 2px;
+      width: min(340px, 100%);
+      max-width: calc(100vw - 1.5rem);
+      max-height: calc(100dvh - 1.5rem);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+      display: flex; flex-direction: column; gap: 0.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      animation: modalIn 0.18s cubic-bezier(0.2, 0.9, 0.3, 1);
+    }
+    .modal::-webkit-scrollbar { width: 6px; }
+    .modal::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+    @keyframes backdropIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    /* The dialog rises a hair instead of popping; at this size a plain fade
+       reads as a flicker. */
+    @keyframes modalIn {
+      from { opacity: 0; transform: translateY(6px) scale(0.98); }
+      to   { opacity: 1; transform: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .backdrop, .modal { animation: none; }
+    }
+    /* Title mirrors the lobby's uppercase, letterspaced headings and its
+       muted .panel-title colour, so the dialog reads as part of the shell. */
+    h3 {
+      margin: 0;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-align: center;
+      color: var(--text-dim);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+
+    .tiles {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 0.25rem;
+    }
+    .tile {
+      position: relative;
+      display: flex; flex-direction: column; align-items: center; gap: 3px;
+      padding: 0.35rem 0.2rem 0.3rem;
+      min-height: 32px;
+      border-radius: 6px;
+    }
+    /* A single accent border over a soft tint, rather than the old border +
+       ring (which drew a 2px double line). */
+    .tile.selected {
+      border-color: var(--accent);
+      background: var(--accent-tint);
+    }
+    @media (hover: hover) {
+      .tile:not(.selected):hover { transform: translateY(-1px); }
+    }
+    .tile img { display: block; width: 42px; height: 42px; object-fit: contain; }
+    .tile .tile-label {
+      display: block;
+      font-size: 0.6rem;
+      line-height: 1.1;
+      text-align: center;
+      color: var(--text-muted);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      max-width: 100%;
+    }
+    .tile.selected .tile-label { color: var(--accent); font-weight: 600; }
+
+    .variants {
+      display: flex; flex-direction: column; gap: 0.35rem;
+      /* Minimal inset, matching the dialog's own padding, so the option rows
+         run the full width of the panel instead of floating inside it. */
+      padding: 2px;
+      background: var(--table-head);
+      border: 1px solid var(--border-light);
+      border-radius: 6px;
+    }
+    .choice-group, .aim-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    /* Hairline between option rows keeps the dense stack legible without
+       introducing a second nested card. */
+    .choice-group + .choice-group,
+    .choice-group + .aim-group {
+      padding-top: 0.35rem;
+      border-top: 1px solid var(--border-light);
+    }
+    /* Right-aligned so chips start at a common x and the rows line up. */
+    .choice-label {
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      min-width: 62px;
+      text-align: right;
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .chip {
+      min-height: 32px;
+      min-width: 32px;
+      padding: 0 0.5rem;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 0.75rem;
+      line-height: 1;
+    }
+    .chip.toggle { min-width: 46px; }
+    /* Chips grow to fill whatever space is left in their row, so every row
+       ends flush at the right: rows with more options get narrower buttons. */
+    .choice-group .chip, .aim-group .chip { flex: 1 1 auto; }
+
+    .languages {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 0 0.3rem;
+      padding-top: 0.35rem;
+      border-top: 1px solid var(--border-light);
+      font-size: 0.72rem;
+    }
+    /* Same link treatment as the lobby's settings modal (--link, underline
+       only on hover). */
+    .languages a {
+      color: var(--link);
+      text-decoration: none;
+      cursor: pointer;
+      padding: 0.4rem 0.15rem;
+    }
+    .languages a:hover { text-decoration: underline; }
+    .languages a.active { color: var(--accent); font-weight: 600; }
+
+    .action {
+      width: 100%;
+      min-height: 40px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      /* Uppercase + letterspacing already give the label weight; the button
+         text stays at the modal's inherited weight rather than bold. */
+      font-size: 0.95rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18);
+    }
+    @media (hover: hover) {
+      .action:hover { transform: translateY(-1px); box-shadow: 0 3px 10px rgba(13, 110, 253, 0.28); }
+      .action:active { transform: none; box-shadow: 0 1px 2px rgba(0, 0, 0, 0.18); }
+    }
+
+    .footer { display: flex; gap: 0.25rem; align-items: stretch; }
+    .footer .msg-btn {
+      flex-shrink: 0;
+      min-width: 40px; min-height: 40px;
+      padding: 0;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      line-height: 1;
+    }
+    .footer .cancel {
+      flex: 1;
+      min-height: 40px;
+      background: var(--modal-cancel);
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 380px) {
+      .tile { padding: 0.3rem 0.15rem; }
+      .tile img { width: 38px; height: 38px; }
+      .choice-label { min-width: 56px; font-size: 0.72rem; }
+      .chip { padding: 0 0.4rem; }
+    }
+  `;constructor(){super(),this.mode="solo",this.opponent="",this.open=!1,this.heading="",this.actionLabel="",this._size=x.get("size","full");let e=x.get("shotClock",Ze);this._shotClock=Je.includes(e)?e:Ze,this._sel=x.get("game","threecushion"),B.some(t=>t.key===this._sel)||(this._sel="threecushion"),this.#o(this._sel),this._lang=this.#t.lang,this.#i=this.#t.onChange(t=>{this._lang=t})}connectedCallback(){super.connectedCallback(),window.addEventListener("keydown",this.#r)}disconnectedCallback(){super.disconnectedCallback(),window.removeEventListener("keydown",this.#r),this.#i?.()}#e(e,t){return this.#t.t(e,t)}get game(){return B.find(e=>e.key===this._sel)}get variant(){let e=this.game;return e.variants.find(t=>t.id===this._vid[this._sel])??e.variants[0]}#o(e){let t=B.find(o=>o.key===e),i=x.get(`v_${e}`,null);this._vid={...this._vid,[e]:t.variants.some(o=>o.id===i)?i:t.variants[0].id},this._freeaim=x.get("freeaim","false")==="true"&&!!t.freeaim,this._size=x.get(`size_${e}`,"full")}show(){this.open=!0}hide(){this.open=!1}_selectGame(e){this._sel!==e&&(this._sel=e,x.set("game",e),this.#o(e))}_selectVariant(e){this._vid={...this._vid,[this._sel]:e},x.set(`v_${this._sel}`,e)}_selectSize(e){this._size=e,x.set(`size_${this._sel}`,e),this._sel==="snooker"&&e==="mini"&&!["3","6"].includes(this._vid[this._sel])&&this._selectVariant("3")}_selectShotClock(e){this._shotClock=e,x.set("shotClock",e)}_toggleFreeaim(){this._freeaim=!this._freeaim,x.set("freeaim",String(this._freeaim))}_confirm(){let e={...this.variant.options};this._size==="mini"?e.tableSize=["snooker","nineball","eightball"].includes(this.game.key)?"6":"5":this.game.key==="snooker"&&(e.tableSize="12"),this.game.freeaim&&this._freeaim&&(e.freeaim="true"),e.shotClock=this._shotClock,ye(this,"confirm",{mode:this.mode,ruleType:this.game.key,options:e,opponent:this.opponent||void 0}),this.hide()}#a(e){let t=this.#e(e.label);return t==="Three Cushion"?"3-Cush.":t}_actionLabel(){return this.#e(this.actionLabel||"PLAY")}_title(){return this.heading?this.#e(this.heading):this.mode==="challenge"?this.#e("Challenge {name}",{name:this.opponent}):this.#e("Play Solo")}render(){if(!this.open)return s``;let e=this.game;return s`
+      <div class="backdrop" @click=${t=>t.target===t.currentTarget&&this.hide()}>
+        <div class="modal" role="dialog" aria-modal="true" aria-label=${this.#e("Select game variant")}>
+          <h3>${this._title()}</h3>
+
+          <div class="tiles" role="radiogroup" aria-label=${this.#e("Game type")}>
+            ${B.map(t=>s`
+              <button
+                class="tile ${t.key===this._sel?"selected":""}"
+                role="radio"
+                aria-checked=${t.key===this._sel}
+                title=${this.#e(t.label)}
+                @click=${()=>this._selectGame(t.key)}
+              >
+                <img src=${t.img} alt="" />
+                <span class="tile-label">${this.#a(t)}</span>
+              </button>
+            `)}
+          </div>
+
+          ${e.variants.length>1||e.freeaim||e.sizes?s`
+            <div class="variants" role="radiogroup" aria-label=${this.#e("{game} variant",{game:this.#e(e.label)})}>
+              ${e.sizes?s`
+                <div class="choice-group">
+                  <span class="choice-label">${this.#e("Table:")}</span>
+                  <button
+                    class="chip ${this._size==="full"?"selected":""}"
+                    role="radio"
+                    aria-checked=${this._size==="full"}
+                    @click=${()=>this._selectSize("full")}
+                  >${this.#e("Full size")}</button>
+                  <button
+                    class="chip ${this._size==="mini"?"selected":""}"
+                    role="radio"
+                    aria-checked=${this._size==="mini"}
+                    @click=${()=>this._selectSize("mini")}
+                  >${this.#e("Mini")}</button>
+                </div>
+              `:""}
+              <div class="choice-group">
+                <span class="choice-label">${this.#e("Shot time:")}</span>
+                ${Je.map(t=>s`
+                  <button
+                    class="chip ${this._shotClock===t?"selected":""}"
+                    role="radio"
+                    aria-checked=${this._shotClock===t}
+                    @click=${()=>this._selectShotClock(t)}
+                  >${t}s</button>
+                `)}
+              </div>
+              ${e.variants.length>1?s`
+                <div class="choice-group">
+                  <span class="choice-label">${this.#e("Rule:")}</span>
+                  ${e.variants.filter(t=>e.key!=="snooker"||this._size!=="mini"||["3","6"].includes(t.id)).map(t=>s`
+                    <button
+                      class="chip ${this.variant.id===t.id?"selected":""}"
+                      role="radio"
+                      aria-checked=${this.variant.id===t.id}
+                      title=${t.label}
+                      @click=${()=>this._selectVariant(t.id)}
+                    >${this.#e(t.short||t.label)}</button>
+                  `)}
+                </div>
+              `:""}
+              ${e.freeaim?s`
+                <div class="aim-group">
+                  <span class="choice-label">${this.#e("Aim:")}</span>
+                  <button
+                    class="chip toggle ${this._freeaim?"on":""}"
+                    aria-pressed=${this._freeaim}
+                    title=${this.#e("Free aim")}
+                    @click=${()=>this._toggleFreeaim()}
+                  >${this.#e("Free")}</button>
+                  <button
+                    class="chip toggle ${this._freeaim?"":"on"}"
+                    aria-pressed=${!this._freeaim}
+                    title=${this.#e("Aim assist")}
+                    @click=${()=>this._toggleFreeaim()}
+                  >${this.#e("Assist")}</button>
+                </div>
+              `:""}
+            </div>
+          `:""}
+
+          <button class="action" @click=${()=>this._confirm()}>
+            ${this._actionLabel()}
+          </button>
+
+          <div class="footer">
+            ${this.mode==="challenge"?s`<button class="msg-btn" type="button" aria-label=${this.#e("Send message")}
+                  @click=${()=>{ye(this,"message"),this.hide()}}>💬</button>`:""}
+            <button class="cancel" @click=${()=>{ye(this,"cancel"),this.hide()}}>
+              ${this.#e("Cancel")}
+            </button>
+          </div>
+
+          <div class="languages" aria-label=${this.#e("Language")}>
+            ${this.#t.languages.map(t=>s`
+              <a
+                href="#"
+                class=${t.code===this._lang?"active":""}
+                aria-current=${t.code===this._lang?"true":"false"}
+                @click=${i=>{i.preventDefault(),this.#t.set(t.code)}}
+              >${t.label}</a>
+            `)}
+          </div>
+        </div>
+      </div>`}};customElements.define("selector-modal",ve);var we=class extends g{static properties={ruleType:{type:String},options:{attribute:!1},durationMinutes:{type:Number},busy:{type:Boolean},error:{type:String}};static styles=h`
+        :host { display: block; color: var(--text); }
+        .field { margin: .3rem 0; }
+        label { display: block; margin-bottom: .25rem; color: var(--text-muted); font-size: .75rem; }
+        select { width: 100%; box-sizing: border-box; padding: .25rem; background: var(--btn-bg); color: var(--text); border: 1px solid var(--btn-border); border-radius: 4px; font: inherit; }
+        .config { display: flex; align-items: center; justify-content: center; gap: .3rem; padding: .25rem; border: 1px dashed var(--border); border-radius: 4px; }
+        .config-actions { display: flex; align-items: center; gap: .3rem; flex-shrink: 0; }
+        .btn-preset { display: flex; align-items: center; gap: .25rem; padding: .25rem .4rem; background: var(--btn-bg); color: var(--text); border: 1px solid var(--btn-border); border-radius: 4px; cursor: pointer; font: inherit; font-size: .75rem; }
+        .btn-preset:hover { background: var(--btn-hover, #444); }
+        .btn-preset img { width: 18px; height: 18px; display: block; }
+        .create { width: 100%; padding: .35rem; font-size: .9rem; }
+        .error { padding: .45rem; color: #721c24; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 4px; }
+    `;constructor(){super(),this.ruleType="",this.options={},this.durationMinutes=10,this.busy=!1,this.error=""}_openChooser(){this.renderRoot.querySelector("selector-modal").show()}_selectPreset(e,t,i=10){this.ruleType=e,this.options=t,this.durationMinutes=i,this._notifyChange(),this._create()}_onParameters(e){this.ruleType=e.detail.ruleType,this.options=e.detail.options||{},this._notifyChange(),this._create()}_notifyChange(){this.dispatchEvent(new CustomEvent("parameters-change",{bubbles:!0,composed:!0,detail:{ruleType:this.ruleType,options:this.options,durationMinutes:this.durationMinutes}}))}_onDurationChange(e){this.durationMinutes=Number(e.target.value),this._notifyChange()}_create(){this.dispatchEvent(new CustomEvent("create-arena",{bubbles:!0,composed:!0}))}render(){return s`<div class="field"><label for="duration">Duration</label><select id="duration" .value=${String(this.durationMinutes)} @change=${this._onDurationChange}><option value="10">10 minutes</option><option value="30">30 minutes</option></select></div><div class="field"><label>Game type</label><div class="config"><div class="config-actions"><button type="button" class="btn-preset" title="10 mins Three Cushion (mini, race to 7)" @click=${()=>this._selectPreset("threecushion",{raceTo:"7",tableSize:"5"},10)}><img src="assets/threecushion.png" alt="" /><span>3-Cushion</span></button><button type="button" class="btn-preset" title="10 mins Nine Ball (mini, freeaim)" @click=${()=>this._selectPreset("nineball",{tableSize:"6",freeaim:"true"},10)}><img src="assets/nineball.png" alt="" /><span>9-Ball</span></button><button type="button" class="btn-preset" title="10 mins Eight Ball (mini, freeaim)" @click=${()=>this._selectPreset("eightball",{tableSize:"6",freeaim:"true"},10)}><img src="assets/eightball.png" alt="" /><span>8-Ball</span></button><button type="button" class="btn-preset" @click=${this._openChooser}>Custom</button></div></div></div>${this.error?s`<div class="error" role="alert">${this.error}</div>`:""}<selector-modal heading="Select game variant" actionLabel="Use these parameters" @confirm=${this._onParameters}></selector-modal>`}};customElements.define("arena-create-form",we);var _e=class extends g{static properties={_theme:{type:String,reflect:!0,attribute:"theme"},_id:{state:!0},_ruleType:{state:!0},_options:{state:!0},_durationMinutes:{state:!0},_createdArena:{state:!0},_arenas:{state:!0},_completedArenas:{state:!0},_busy:{state:!0},_error:{state:!0}};static styles=[se,Oe,pe,h`
+        /* No min-height: 100vh: the app hugs its content so the site-links line in
+           arena.html sits directly under it instead of below a full-viewport box. */
+        :host { display: block; box-sizing: border-box; padding: .5rem; background: var(--bg); color: var(--text); font-family: 'Exo', sans-serif; font-size: .85rem; }
+        .container { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; }
+        .topbar { display: flex; align-items: center; gap: .4rem; margin-bottom: .4rem; position: sticky; top: 0; z-index: 2; padding: .25rem 0; background: var(--bg); }
+        .topbar .logo { width: 32px; height: 32px; flex-shrink: 0; filter: grayscale(100%); opacity: 0.7; }
+        .topbrand { display: inline-flex; align-items: center; gap: .4rem; text-decoration: none; color: inherit; flex-shrink: 0; }
+        .topbrand:hover { opacity: 0.85; }
+        .topbrand .logo { opacity: 1; transition: opacity 0.2s; }
+        h1 { flex: 1; margin: 0; font-size: 1rem; letter-spacing: .1em; text-transform: uppercase; color: var(--text-dim); }
+        h1 a { color: inherit; text-decoration: none; }
+        h1 a:hover { text-decoration: underline; }
+        h1 .version { font-size: 0.65rem; color: var(--text-dim); margin-left: 0.25rem; vertical-align: super; font-weight: 200; }
+        .panel { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: .4rem; margin-bottom: .25rem; }
+        .title { margin: 0 0 .25rem; font-size: .8rem; font-weight: 600; }
+        .error { padding: .45rem; color: #721c24; background: #f8d7da; border: 1px solid #f5c6cb; border-radius: 4px; }
+        .success { color: #198754; }
+        .url { display: flex; gap: .3rem; }
+        .url input { flex: 1; min-width: 0; padding: .35rem; background: var(--bg); color: var(--text); border: 1px solid var(--border); border-radius: 4px; font: inherit; font-size: .7rem; }
+        .meta { color: var(--text-muted); font-size: .75rem; line-height: 1.6; }
+        .back-lobby { margin-left: auto; }
+    `];constructor(){super(),this._theme=document.documentElement.getAttribute("theme")||localStorage.getItem("theme")||"dark",document.documentElement.setAttribute("theme",this._theme),document.documentElement.style.colorScheme=this._theme;let e=new URLSearchParams(window.location.search),t=e.get("id")||e.get("tournamentId");if(t){let i=new URL("./lobby.html",window.location.href);i.searchParams.set("tournamentId",t),window.location.replace(i.href);return}this._ruleType="",this._options={},this._durationMinutes=10,this._createdArena=null,this._arenas=[],this._completedArenas=[],this._busy=!1,this._error=""}connectedCallback(){super.connectedCallback(),this._loadCompletedArenas()}async _loadCompletedArenas(){try{let e=await fetch(`${w}/api/arena/results`),t=await e.json();e.ok&&Array.isArray(t.results)&&(this._completedArenas=t.results)}catch{this._completedArenas=[]}}async _create(){if(!this._ruleType){this._error="Choose game parameters first.";return}this._busy=!0,this._error="";try{let e=await fetch(`${w}/api/arena`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({creatorId:b.clientId,creatorName:b.userName,ruleType:this._ruleType,options:this._options,durationMinutes:this._durationMinutes})}),t=await e.json();if(!e.ok)throw new Error(t.error||`Create failed (${e.status})`);this._createdArena=t.arena,await this._refreshActiveArenas(),await this._loadCompletedArenas()}catch(e){this._error=e.message||"Unable to create Arena."}finally{this._busy=!1}}_backToLobby(){window.location.href="./lobby.html"}_renderHeader(){return s`<header class="topbar">
+            <a href="https://billiards.tailuge.workers.dev/lobby" class="topbrand" aria-label="Billiards lobby"><img src="assets/threecushion.png" class="logo" alt="" /></a>
+            <h1><a href="https://billiards.tailuge.workers.dev/lobby">Billiards</a><a href="https://github.com/tailuge/billiards" target="_blank" rel="noopener" class="version">${Ge(De)}</a></h1>
+            <trophy-item></trophy-item>
+            <user-badge></user-badge>
+            <button class="back-lobby" type="button" @click=${this._backToLobby}>Back to lobby</button>
+        </header>`}_arenaUrl(){if(!this._createdArena)return"";let e=window.location.origin,t=window.location.pathname.replace(/\/tournament\/[^/]*$/,"/lobby.html");return`${e}${t}?tournamentId=${encodeURIComponent(this._createdArena.id)}`}async _copy(){let e=this._arenaUrl();try{await navigator.clipboard.writeText(e)}catch{let t=this.renderRoot.querySelector(".url input");t&&(t.focus(),t.select())}}_onArenasLoaded(e){this._arenas=e.detail.arenas||[],this._loadCompletedArenas()}async _refreshActiveArenas(){let e=this.renderRoot.querySelector("active-arenas");e&&await e.load()}_renderCompletedArenas(){return this._completedArenas.length?s`<div class="arena-list" aria-label="Completed Arenas">${this._completedArenas.map(e=>me(e,!0))}</div>`:s`<div class="empty">No completed Arenas.</div>`}_renderArenaSections(){return s`
+            <section class="panel">
+                <active-arenas heading="Active Arenas" @arenas-loaded=${this._onArenasLoaded}></active-arenas>
+            </section>
+            <section class="panel">
+                <h2 class="title">Completed Arenas</h2>
+                ${this._renderCompletedArenas()}
+            </section>`}render(){let e=this._createdArena;return s`<div class="container">
+            ${this._renderHeader()}
+            <section class="panel">
+                <h2 class="title">Create Arena</h2>
+                <arena-create-form
+                    .ruleType=${this._ruleType}
+                    .options=${this._options}
+                    .durationMinutes=${this._durationMinutes}
+                    .busy=${this._busy}
+                    .error=${this._error}
+                    @parameters-change=${t=>{this._ruleType=t.detail.ruleType,this._options=t.detail.options,this._durationMinutes=t.detail.durationMinutes}}
+                    @create-arena=${this._create}
+                ></arena-create-form>
+            </section>
+            ${e?s`<section class="panel"><h2 class="title success">Arena created</h2><div class="meta">${e.ruleType} · ${e.durationMinutes} minutes · ${e.status}</div><div class="url"><input readonly value=${this._arenaUrl()} aria-label="Arena URL" @focus=${t=>t.target.select()} /><button type="button" @click=${this._copy}>Copy</button></div><p class="empty">Share this URL to invite players.</p></section>`:""}
+            ${this._renderArenaSections()}
+        </div>`}};customElements.define("arena-app",_e);})();
+/*! Bundled license information:
+
+@lit/reactive-element/css-tag.js:
+  (**
+   * @license
+   * Copyright 2019 Google LLC
+   * SPDX-License-Identifier: BSD-3-Clause
+   *)
+
+@lit/reactive-element/reactive-element.js:
+lit-html/lit-html.js:
+lit-element/lit-element.js:
+  (**
+   * @license
+   * Copyright 2017 Google LLC
+   * SPDX-License-Identifier: BSD-3-Clause
+   *)
+
+lit-html/is-server.js:
+  (**
+   * @license
+   * Copyright 2022 Google LLC
+   * SPDX-License-Identifier: BSD-3-Clause
+   *)
+*/
