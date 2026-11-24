@@ -1,4 +1,4 @@
-const CACHE_NAME = 'billiards-pwa-v1'
+const CACHE_NAME = 'billiards-pwa-v2'
 
 const PRECACHE_ASSETS = [
   './',
@@ -28,8 +28,13 @@ const PRECACHE_ASSETS = [
   './assets/icon-maskable.png',
   './assets/wave.jpg',
   './models/p8.min.gltf',
+  './models/p8.min.bin',
   './models/threecushion.min.gltf',
+  './models/threecushion.min.bin',
   './models/snooker.min.gltf',
+  './models/snooker.min.bin',
+  './models/background.gltf',
+  './models/background.bin',
   './sounds/ballcollision.ogg',
   './sounds/cue.ogg',
   './sounds/cushion.ogg',

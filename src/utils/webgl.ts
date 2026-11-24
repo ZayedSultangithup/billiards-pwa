@@ -16,7 +16,7 @@ export function renderer(element: HTMLElement) {
   })
 
   renderer.shadowMap.enabled = false
-  renderer.autoClear = false
+  renderer.autoClear = true
   renderer.outputColorSpace = SRGBColorSpace
   renderer.toneMapping = NoToneMapping
   renderer.sortObjects = false

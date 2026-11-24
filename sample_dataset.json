@@ -16,50 +16,32 @@
       "pockets": [
         {
           "pocket_id": 1,
-          "position": [
-            0,
-            0
-          ],
+          "position": [0, 0],
           "radius": 28
         },
         {
           "pocket_id": 2,
-          "position": [
-            500,
-            0
-          ],
+          "position": [500, 0],
           "radius": 28
         },
         {
           "pocket_id": 3,
-          "position": [
-            1000,
-            0
-          ],
+          "position": [1000, 0],
           "radius": 28
         },
         {
           "pocket_id": 4,
-          "position": [
-            0,
-            500
-          ],
+          "position": [0, 500],
           "radius": 28
         },
         {
           "pocket_id": 5,
-          "position": [
-            500,
-            500
-          ],
+          "position": [500, 500],
           "radius": 28
         },
         {
           "pocket_id": 6,
-          "position": [
-            1000,
-            500
-          ],
+          "position": [1000, 500],
           "radius": 28
         }
       ]
@@ -370,9 +352,7 @@
       }
     ],
     "outcome": {
-      "pocketed_ball_ids": [
-        1
-      ],
+      "pocketed_ball_ids": [1],
       "scratch": false,
       "foul": false,
       "foul_type": null,

@@ -3,12 +3,52 @@ import { Scene, InstancedMesh } from "three"
 
 describe("ParticleSystem", () => {
   let scene: Scene
+  let originalGetContext: any
+  let pixels: Map<HTMLCanvasElement, Uint8ClampedArray>
 
   beforeEach(() => {
     scene = new Scene()
-    // Mock the scene.add method
     scene.add = jest.fn()
     scene.remove = jest.fn()
+
+    pixels = new Map()
+    originalGetContext = HTMLCanvasElement.prototype.getContext
+    HTMLCanvasElement.prototype.getContext = function (contextId: string) {
+      if (contextId === "2d") {
+        const canvas = this as HTMLCanvasElement
+        let data = pixels.get(canvas)
+        const total = (canvas.width || 88) * (canvas.height || 44)
+        if (!data || data.length !== total * 4) {
+          data = new Uint8ClampedArray(total * 4)
+          pixels.set(canvas, data)
+        }
+        const ctx = {
+          fillStyle: "#000000",
+          fillRect: (x: number, y: number, w: number, h: number) => {
+            const isWhite = ctx.fillStyle === "#ffffff"
+            const cw = canvas.width || 88
+            for (let py = y; py < y + h; py++) {
+              for (let px = x; px < x + w; px++) {
+                const idx = (py * cw + px) * 4
+                data![idx] = isWhite ? 255 : 0
+                data![idx + 1] = isWhite ? 255 : 0
+                data![idx + 2] = isWhite ? 255 : 0
+                data![idx + 3] = 255
+              }
+            }
+          },
+          getImageData: (_x: number, _y: number, _w: number, _h: number) => ({
+            data: pixels.get(canvas)!,
+          }),
+        }
+        return ctx as any
+      }
+      return null
+    }
+  })
+
+  afterEach(() => {
+    HTMLCanvasElement.prototype.getContext = originalGetContext
   })
 
   it("should initialize with the correct number of particles based on background filtering", () => {
