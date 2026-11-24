@@ -39,7 +39,7 @@ jobs:
           timeout_minutes: 5
           max_attempts: 2
           retry_wait_seconds: 10
-          command: yarn install --immutable
+          command: yarn install
 
       - name: build
         run: yarn build
