@@ -50,6 +50,7 @@ jobs:
           echo done
 
       - name: upload to codecov.io
+        continue-on-error: true
         uses: codecov/codecov-action@v6
         with:
           directory: ./coverage/
