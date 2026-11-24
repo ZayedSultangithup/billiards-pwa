@@ -981,6 +981,21 @@
             <span id="dmStatusText">Actively Recording</span>
           </div>
 
+          <div class="capture-mode-row">
+            <label for="dmCaptureMode">📸 Photos Mode:</label>
+            <select id="dmCaptureMode">
+              <option value="keyframes" selected>
+                Keyframes Only (Before &amp; After — 2 photos/shot, ~98% saved)
+              </option>
+              <option value="physics_only">
+                Physics Only (No Photos — 0 photos, ~99.9% saved)
+              </option>
+              <option value="full">
+                Full Visual (30 FPS All Motion Frames)
+              </option>
+            </select>
+          </div>
+
           <div class="stats-grid">
             <div class="stat-card">
               <div class="stat-value" id="dmGamesCount">0</div>

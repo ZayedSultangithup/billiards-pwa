@@ -1,6 +1,7 @@
 import { DatasetValidator } from "../../src/collector/validator"
 import { TrainingDatasetItem } from "../../src/collector/types"
 import { DatasetExporter } from "../../src/collector/export"
+import { DataCollector } from "../../src/collector/datacollector"
 
 describe("DatasetValidator", () => {
   const validMockItem: TrainingDatasetItem = {
@@ -216,5 +217,29 @@ describe("DatasetValidator", () => {
     const parsed = JSON.parse(jsonStr)
     expect(Array.isArray(parsed)).toBe(true)
     expect(parsed[0].shot.shot_id).toBe("shot_000042")
+  })
+
+  it("validates keyframes-only mode with empty frames_during", () => {
+    const keyframesItem = JSON.parse(JSON.stringify(validMockItem))
+    keyframesItem.shot.visual_data.frames_during = []
+    const result = DatasetValidator.validate(keyframesItem)
+    expect(result.isValid).toBe(true)
+    expect(result.missingFields).toHaveLength(0)
+  })
+})
+
+describe("DataCollector Capture Mode", () => {
+  it("defaults to keyframes mode and updates mode correctly", () => {
+    const collector = DataCollector.getInstance()
+    expect(collector.captureMode).toBe("keyframes")
+
+    collector.setCaptureMode("physics_only")
+    expect(collector.captureMode).toBe("physics_only")
+
+    collector.setCaptureMode("full")
+    expect(collector.captureMode).toBe("full")
+
+    collector.setCaptureMode("keyframes")
+    expect(collector.captureMode).toBe("keyframes")
   })
 })

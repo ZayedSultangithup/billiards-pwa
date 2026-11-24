@@ -99,6 +99,16 @@ export class DatasetManagerView {
       clearBtn.onclick = () => this.handleClear()
     }
 
+    const captureModeSelect = id("dmCaptureMode") as HTMLSelectElement | null
+    if (captureModeSelect) {
+      captureModeSelect.value = this.collector.captureMode
+      captureModeSelect.onchange = () => {
+        const val = captureModeSelect.value as
+          "keyframes" | "full" | "physics_only"
+        this.collector.setCaptureMode(val)
+      }
+    }
+
     // Bind AI Mode options
     this.initAiOptions()
   }
@@ -132,6 +142,10 @@ export class DatasetManagerView {
   openModal() {
     if (!this.modal) return
     this.modal.classList.add("open")
+    const captureModeSelect = id("dmCaptureMode") as HTMLSelectElement | null
+    if (captureModeSelect) {
+      captureModeSelect.value = this.collector.captureMode
+    }
     this.updateStatsUI()
     this.pollIntervalId = window.setInterval(() => this.updateStatsUI(), 2000)
   }

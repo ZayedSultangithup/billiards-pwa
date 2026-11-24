@@ -27,6 +27,7 @@ export class DataCollector {
   public isEnabled: boolean = true
   public isPaused: boolean = false
   public lastError: string | null = null
+  public captureMode: "keyframes" | "full" | "physics_only" = "keyframes"
 
   private storage: DatasetStorage
   private capturer: FrameCapturer
@@ -57,6 +58,24 @@ export class DataCollector {
     this.capturer = new FrameCapturer(1280, 720)
     this.sessionId = `session_${Date.now().toString(36)}`
     this.gameId = `game_${Date.now().toString(36)}`
+    if (typeof localStorage !== "undefined") {
+      const saved = localStorage.getItem("billiards_capture_mode")
+      if (
+        saved === "keyframes" ||
+        saved === "full" ||
+        saved === "physics_only"
+      ) {
+        this.captureMode = saved
+      }
+    }
+  }
+
+  setCaptureMode(mode: "keyframes" | "full" | "physics_only") {
+    this.captureMode = mode
+    if (typeof localStorage !== "undefined") {
+      localStorage.setItem("billiards_capture_mode", mode)
+    }
+    console.log(`[DataCollector] Capture mode set to ${mode}`)
   }
 
   static getInstance(): DataCollector {
@@ -166,11 +185,13 @@ export class DataCollector {
     const imageBeforePath = `images/${this.gameId}/${shotId}/before.png`
 
     // 1. Capture before image
-    const beforeBlob = await this.capturer.capture(canvas)
-    if (beforeBlob) {
-      this.storage
-        .saveImage(imageBeforePath, beforeBlob)
-        .catch((e) => console.warn(e))
+    if (this.captureMode !== "physics_only") {
+      const beforeBlob = await this.capturer.capture(canvas)
+      if (beforeBlob) {
+        this.storage
+          .saveImage(imageBeforePath, beforeBlob)
+          .catch((e) => console.warn(e))
+      }
     }
 
     // 2. Capture state_before
@@ -336,7 +357,9 @@ export class DataCollector {
     this.lastSampleTimeMs = now
     const frameId = this.frameIdCounter++
 
-    this.captureDuringFrame(canvas, now, frameId)
+    if (this.captureMode === "full") {
+      this.captureDuringFrame(canvas, now, frameId)
+    }
     this.samplePhysicsSequence(table, now, frameId, dt)
     this.updateTrajectories(table, now, frameId)
     this.processOutcomes(table, now, elapsedFromShotStart)
@@ -508,11 +531,13 @@ export class DataCollector {
     shot.visual_data.image_after.frame_id = afterFrameId
     shot.visual_data.image_after.timestamp_ms = now
 
-    const afterBlob = await this.capturer.capture(canvas)
-    if (afterBlob) {
-      this.storage
-        .saveImage(shot.visual_data.image_after.path, afterBlob)
-        .catch(() => {})
+    if (this.captureMode !== "physics_only") {
+      const afterBlob = await this.capturer.capture(canvas)
+      if (afterBlob) {
+        this.storage
+          .saveImage(shot.visual_data.image_after.path, afterBlob)
+          .catch(() => {})
+      }
     }
 
     // 2. State After
